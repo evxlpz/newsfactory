@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if title %}{{ title }} — {{ cfg.name }}{% else %}{{ cfg.name }} — {{ tagline }}{% endif %}</title>
+<meta name="description" content="{% block desc %}{{ tagline }}{% endblock %}">
+<link rel="canonical" href="{{ canonical }}">
+{% for l, u in alternates.items() %}<link rel="alternate" hreflang="{{ l }}" href="{{ u }}">
+{% endfor %}{% if alternates %}<link rel="alternate" hreflang="x-default" href="{{ alternates.get(cfg.default_lang, canonical) }}">{% endif %}
+<link rel="alternate" type="application/rss+xml" title="{{ cfg.name }}" href="{{ base }}{{ pre }}feed.xml">
+<meta property="og:site_name" content="{{ cfg.name }}">
+<meta property="og:locale" content="{{ lang }}">
+{% block og %}<meta property="og:type" content="website"><meta property="og:title" content="{{ cfg.name }}">{% endblock %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="max-image-preview:large">
+<link rel="stylesheet" href="/style.css">
+<style>:root{--accent:{{ cfg.colors.accent }};--accent-ink:{{ cfg.colors.accent_ink | default('#fff') }}}</style>
+{% if cfg.analytics and cfg.analytics.cf_token %}<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"{{ cfg.analytics.cf_token }}"}'></script>{% endif %}
+{% if cfg.analytics and cfg.analytics.ga4 %}<script async src="https://www.googletagmanager.com/gtag/js?id={{ cfg.analytics.ga4 }}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','{{ cfg.analytics.ga4 }}');</script>{% endif %}
+{% if cfg.adsense %}<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ cfg.adsense }}" crossorigin="anonymous"></script>{% endif %}
+{% block head %}{% endblock %}
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="logo" href="{{ pre }}">{{ cfg.name }}</a>
+    {% if langs|length > 1 %}<nav class="langs" aria-label="Language">
+      {% for l in langs %}{% set u = alternates.get(l) %}{% if u %}<a href="{{ u }}"{% if l == lang %} aria-current="true"{% endif %}>{{ l|upper }}</a>{% endif %}{% endfor %}
+    </nav>{% endif %}
+  </div>
+  <nav class="wrap cats" aria-label="Rubrics">
+    {% for c, label in cats %}<a href="{{ pre }}c/{{ c }}/">{{ label }}</a>{% endfor %}
+  </nav>
+</header>
+<main class="wrap">
+{% block main %}{% endblock %}
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <p><strong>{{ cfg.name }}</strong> — {{ tagline }}</p>
+    <p><a href="{{ pre }}about/">{{ ui.about }}</a> · <a href="{{ pre }}privacy/">{{ ui.privacy }}</a> · <a href="{{ pre }}feed.xml">{{ ui.rss }}</a>{% if cfg.contact %} · {{ ui.contact }}: {{ cfg.contact }}{% endif %}</p>
+    <p class="muted">© {{ year }} {{ cfg.name }}</p>
+  </div>
+</footer>
+</body>
+</html>

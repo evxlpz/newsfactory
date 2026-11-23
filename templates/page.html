@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block main %}
+<article class="post">
+  <h1>{{ title }}</h1>
+  {% if body %}<div class="body"><p>{{ body }}</p></div>{% else %}<p><a href="{{ pre }}">{{ ui.home }} →</a></p>{% endif %}
+</article>
+{% endblock %}

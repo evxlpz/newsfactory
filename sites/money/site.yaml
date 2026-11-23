@@ -1,0 +1,87 @@
+# Сайт «Капітал». Токени соцмереж — тільки назви secret-змінних, самі значення в GitHub Secrets.
+# domain: null → працює на kapital-news.pages.dev; коли купимо домен — вписати сюди.
+name: Капітал
+pages_project: kapital-news
+domain: null
+langs:
+- uk
+- en
+- pl
+ymyl: true
+topic: економіка, фінансові ринки, криптовалюти, компанії, економіка України
+editorial: 'Пишемо зрозуміло для звичайних людей: що сталося, які цифри, як це може вплинути на гаманець. Жодних інвестиційних
+  порад.'
+tagline:
+  uk: гроші, ринки й крипта без води.
+  en: Money, markets and crypto, no fluff.
+  pl: Pieniądze, rynki i krypto bez lania wody.
+colors:
+  accent: '#12A150'
+  accent_ink: '#ffffff'
+  card_bg: '#0F1A14'
+categories:
+- economy
+- markets
+- crypto
+- companies
+- ukraine
+category_labels:
+  economy:
+    uk: Економіка
+    en: Economy
+    pl: Gospodarka
+  markets:
+    uk: Ринки
+    en: Markets
+    pl: Rynki
+  crypto:
+    uk: Крипта
+    en: Crypto
+    pl: Krypto
+  companies:
+    uk: Компанії
+    en: Companies
+    pl: Firmy
+  ukraine:
+    uk: Україна
+    en: Ukraine
+    pl: Ukraina
+sources:
+- https://www.coindesk.com/arc/outboundfeeds/rss/
+- https://cointelegraph.com/rss
+- https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10001147
+- https://finance.yahoo.com/news/rssindex
+- https://www.epravda.com.ua/rss/
+- https://feeds.bbci.co.uk/news/business/rss.xml
+- https://www.ft.com/rss/home
+max_new_per_run: 2
+default_lang: uk
+analytics:
+  cf_token: null
+  ga4: null
+adsense: null
+socials:
+- type: telegram
+  lang: uk
+  token_env: TG_BOT_TOKEN
+  chat_env: TG_CHAT_MONEY
+- type: viber
+  lang: uk
+  token_env: VIBER_TOKEN_MONEY
+  from_env: VIBER_FROM_MONEY
+- type: facebook
+  lang: uk
+  page_id_env: FB_PAGE_ID_MONEY
+  token_env: FB_TOKEN_MONEY
+- type: instagram
+  lang: uk
+  user_id_env: IG_USER_ID_MONEY
+  token_env: FB_TOKEN_MONEY
+- type: threads
+  lang: uk
+  user_id_env: THREADS_USER_ID_MONEY
+  token_env: THREADS_TOKEN_MONEY
+- type: bluesky
+  lang: en
+  handle_env: BSKY_HANDLE_MONEY
+  password_env: BSKY_PASSWORD_MONEY

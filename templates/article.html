@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block desc %}{{ it.v.dek }}{% endblock %}
+{% block og %}<meta property="og:type" content="article">
+<meta property="og:title" content="{{ it.v.title }}">
+<meta property="og:description" content="{{ it.v.dek }}">
+<meta property="og:image" content="{{ base }}{{ it.img }}">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="article:published_time" content="{{ it.a.created|iso }}">{% endblock %}
+{% block head %}<script type="application/ld+json">{{ jsonld|safe }}</script>{% endblock %}
+{% block main %}
+<article class="post">
+  <a class="cat" href="{{ pre }}c/{{ it.a.category }}/">{{ it.cat }}</a>
+  <h1>{{ it.v.title }}</h1>
+  <p class="dek">{{ it.v.dek }}</p>
+  <time datetime="{{ it.a.created|iso }}">{{ it.a.created|date }}</time>
+  <div class="body">{{ it.v.body_html|safe }}</div>
+  {% if it.v.why %}<aside class="why"><strong>{{ ui.why }}.</strong> {{ it.v.why }}</aside>{% endif %}
+  <p class="src">{{ ui.source }}: <a href="{{ it.a.source.link }}" rel="nofollow noopener" target="_blank">{{ it.a.source.name }}</a></p>
+  {% if it.v.tags %}<p class="tags">{% for tg in it.v.tags %}<span>#{{ tg }}</span>{% endfor %}</p>{% endif %}
+  <p class="note">{{ ui.ai_note }}{% if cfg.ymyl %} {{ ui.ymyl_note }}{% endif %}</p>
+</article>
+{% if related %}<section class="related">
+  <h2>{{ ui.related }}</h2>
+  <div class="grid">{% for i in related %}
+    <article class="card"><a href="{{ i.url }}"><img src="{{ i.img }}" alt="" loading="lazy" width="1200" height="630"></a>
+    <h3><a href="{{ i.url }}">{{ i.v.title }}</a></h3></article>{% endfor %}
+  </div>
+</section>{% endif %}
+{% endblock %}

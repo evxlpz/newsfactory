@@ -1,0 +1,93 @@
+name: newsfactory
+
+on:
+  schedule:
+    - cron: "7 * * * *"      # щогодини: нові статті → збірка → деплой → соцмережі
+    - cron: "41 6 * * 1"     # понеділок 08:41 Київ: тижневий звіт у Telegram
+  workflow_dispatch:
+    inputs:
+      sites:
+        description: "id сайтів через кому (порожньо = всі)"
+        required: false
+        default: ""
+      skip_generate:
+        description: "тільки збірка+деплой, без нових статей"
+        type: boolean
+        default: false
+
+concurrency:
+  group: newsfactory
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    env:
+      SECRETS_JSON: ${{ toJSON(secrets) }}
+      SITES: ${{ github.event.inputs.sites }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - run: pip install -r requirements.txt
+
+      - name: Кеш обкладинок
+        uses: actions/cache@v4
+        with:
+          path: .cache/img
+          key: img-${{ github.run_id }}
+          restore-keys: img-
+
+      - name: Тижневий звіт
+        if: github.event.schedule == '41 6 * * 1'
+        run: python -m engine.run report && python -m engine.run feeds
+
+      - name: Нові статті (Gemini)
+        if: github.event.schedule != '41 6 * * 1' && github.event.inputs.skip_generate != 'true'
+        run: python -m engine.run generate --sites "$SITES"
+
+      - name: Збірка сайтів
+        run: python -m engine.run build
+
+      - name: Зберегти контент
+        run: |
+          git config user.name "newsfactory-bot"
+          git config user.email "newsfactory-bot@users.noreply.github.com"
+          git add content state
+          git diff --cached --quiet || git commit -m "content: $(date -u +%F' '%H:%M)"
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done
+
+      - name: Деплой Cloudflare Pages
+        run: python -m engine.deploy
+
+      - name: Автопостинг
+        if: github.event.schedule != '41 6 * * 1'
+        run: python -m engine.run distribute --sites "$SITES"
+
+      - name: Зберегти стан постингу
+        if: always()
+        run: |
+          git add state
+          git diff --cached --quiet || git commit -m "state: posts $(date -u +%F' '%H:%M)"
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done
+
+      - name: Алерт про падіння
+        if: failure()
+        run: |
+          python - <<'EOF'
+          from engine.distribute import notify_admin
+          import os
+          notify_admin(f"🔴 newsfactory впав: {os.environ['GITHUB_SERVER_URL']}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}")
+          EOF

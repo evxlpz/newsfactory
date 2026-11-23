@@ -1,0 +1,79 @@
+# Сайт «Пульс». Токени соцмереж — тільки назви secret-змінних, самі значення в GitHub Secrets.
+# domain: null → працює на puls-health.pages.dev; коли купимо домен — вписати сюди.
+name: Пульс
+pages_project: puls-health
+domain: null
+langs:
+- uk
+- en
+ymyl: true
+topic: здоров'я, медичні дослідження, зір і очі, краса, харчування, спорт і сон
+editorial: Тільки новини досліджень і офіційних організацій (ВООЗ, МОЗ, університети). Не даємо медичних порад; де доречно
+  — нагадуємо звернутися до лікаря.
+tagline:
+  uk: новини здоров'я та науки про тіло — без міфів.
+  en: Health and body science news, minus the myths.
+colors:
+  accent: '#E5484D'
+  accent_ink: '#ffffff'
+  card_bg: '#1C1214'
+categories:
+- research
+- vision
+- beauty
+- fitness
+- medicine
+category_labels:
+  research:
+    uk: Дослідження
+    en: Research
+  vision:
+    uk: Зір
+    en: Vision
+  beauty:
+    uk: Краса
+    en: Beauty
+  fitness:
+    uk: Спорт і сон
+    en: Fitness & sleep
+  medicine:
+    uk: Медицина
+    en: Medicine
+sources:
+- https://www.sciencedaily.com/rss/health_medicine.xml
+- https://medicalxpress.com/rss-feed/
+- https://www.who.int/rss-feeds/news-english.xml
+- https://www.nih.gov/news-releases/feed.xml
+- https://www.sciencedaily.com/rss/health_medicine/eye_care.xml
+- https://www.aao.org/rss/eye-health-news
+max_new_per_run: 2
+default_lang: uk
+analytics:
+  cf_token: null
+  ga4: null
+adsense: null
+socials:
+- type: telegram
+  lang: uk
+  token_env: TG_BOT_TOKEN
+  chat_env: TG_CHAT_HEALTH
+- type: viber
+  lang: uk
+  token_env: VIBER_TOKEN_HEALTH
+  from_env: VIBER_FROM_HEALTH
+- type: facebook
+  lang: uk
+  page_id_env: FB_PAGE_ID_HEALTH
+  token_env: FB_TOKEN_HEALTH
+- type: instagram
+  lang: uk
+  user_id_env: IG_USER_ID_HEALTH
+  token_env: FB_TOKEN_HEALTH
+- type: threads
+  lang: uk
+  user_id_env: THREADS_USER_ID_HEALTH
+  token_env: THREADS_TOKEN_HEALTH
+- type: bluesky
+  lang: en
+  handle_env: BSKY_HANDLE_HEALTH
+  password_env: BSKY_PASSWORD_HEALTH

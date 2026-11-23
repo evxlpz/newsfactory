@@ -1,0 +1,87 @@
+# Сайт «Нейрон». Токени соцмереж — тільки назви secret-змінних, самі значення в GitHub Secrets.
+# domain: null → працює на neiron-news.pages.dev; коли купимо домен — вписати сюди.
+name: Нейрон
+pages_project: neiron-news
+domain: null
+langs:
+- uk
+- en
+- pl
+topic: штучний інтелект, технології, гаджети, софт, наука про технології
+editorial: Пишемо для людей, яким цікаві технології, але без зайвого жаргону. Пояснюємо терміни одним реченням.
+tagline:
+  uk: новини штучного інтелекту й технологій простою мовою.
+  en: AI and tech news in plain language.
+  pl: Wiadomości o AI i technologiach prostym językiem.
+colors:
+  accent: '#6D5DF6'
+  accent_ink: '#ffffff'
+  card_bg: '#15131F'
+categories:
+- ai
+- gadgets
+- software
+- science
+- business
+category_labels:
+  ai:
+    uk: ШІ
+    en: AI
+    pl: AI
+  gadgets:
+    uk: Гаджети
+    en: Gadgets
+    pl: Gadżety
+  software:
+    uk: Софт
+    en: Software
+    pl: Oprogramowanie
+  science:
+    uk: Наука
+    en: Science
+    pl: Nauka
+  business:
+    uk: Бізнес
+    en: Business
+    pl: Biznes
+sources:
+- https://techcrunch.com/feed/
+- https://www.theverge.com/rss/index.xml
+- https://feeds.arstechnica.com/arstechnica/index
+- https://www.engadget.com/rss.xml
+- https://openai.com/news/rss.xml
+- https://blog.google/technology/ai/rss/
+- https://ain.ua/feed/
+- https://dou.ua/feed/
+- https://www.technologyreview.com/feed/
+max_new_per_run: 2
+default_lang: uk
+analytics:
+  cf_token: null
+  ga4: null
+adsense: null
+socials:
+- type: telegram
+  lang: uk
+  token_env: TG_BOT_TOKEN
+  chat_env: TG_CHAT_AITECH
+- type: viber
+  lang: uk
+  token_env: VIBER_TOKEN_AITECH
+  from_env: VIBER_FROM_AITECH
+- type: facebook
+  lang: uk
+  page_id_env: FB_PAGE_ID_AITECH
+  token_env: FB_TOKEN_AITECH
+- type: instagram
+  lang: uk
+  user_id_env: IG_USER_ID_AITECH
+  token_env: FB_TOKEN_AITECH
+- type: threads
+  lang: uk
+  user_id_env: THREADS_USER_ID_AITECH
+  token_env: THREADS_TOKEN_AITECH
+- type: bluesky
+  lang: en
+  handle_env: BSKY_HANDLE_AITECH
+  password_env: BSKY_PASSWORD_AITECH

@@ -1,0 +1,84 @@
+# Сайт «Дивосвіт». Токени соцмереж — тільки назви secret-змінних, самі значення в GitHub Secrets.
+# domain: null → працює на dyvosvit.pages.dev; коли купимо домен — вписати сюди.
+name: Дивосвіт
+pages_project: dyvosvit
+domain: null
+langs:
+- uk
+- en
+- pl
+topic: цікава наука, космос, тварини, історія, дивні й незвичні новини зі світу
+editorial: Легкий, живий тон, але без вигадок. Факти — з джерела. Заголовок інтригує, але не бреше.
+tagline:
+  uk: дивне, цікаве й неймовірне — але правда.
+  en: Weird, wonderful and true.
+  pl: Dziwne, ciekawe i prawdziwe.
+colors:
+  accent: '#F59E0B'
+  accent_ink: '#111111'
+  card_bg: '#1A160E'
+categories:
+- science
+- space
+- animals
+- history
+- weird
+category_labels:
+  science:
+    uk: Наука
+    en: Science
+    pl: Nauka
+  space:
+    uk: Космос
+    en: Space
+    pl: Kosmos
+  animals:
+    uk: Тварини
+    en: Animals
+    pl: Zwierzęta
+  history:
+    uk: Історія
+    en: History
+    pl: Historia
+  weird:
+    uk: Дивне
+    en: Weird
+    pl: Dziwne
+sources:
+- https://www.sciencealert.com/feed
+- https://www.livescience.com/feeds/all
+- https://www.smithsonianmag.com/rss/latest_articles/
+- https://www.odditycentral.com/feed
+- https://www.space.com/feeds/all
+- https://www.iflscience.com/rss.xml
+max_new_per_run: 2
+default_lang: uk
+analytics:
+  cf_token: null
+  ga4: null
+adsense: null
+socials:
+- type: telegram
+  lang: uk
+  token_env: TG_BOT_TOKEN
+  chat_env: TG_CHAT_LIFESTYLE
+- type: viber
+  lang: uk
+  token_env: VIBER_TOKEN_LIFESTYLE
+  from_env: VIBER_FROM_LIFESTYLE
+- type: facebook
+  lang: uk
+  page_id_env: FB_PAGE_ID_LIFESTYLE
+  token_env: FB_TOKEN_LIFESTYLE
+- type: instagram
+  lang: uk
+  user_id_env: IG_USER_ID_LIFESTYLE
+  token_env: FB_TOKEN_LIFESTYLE
+- type: threads
+  lang: uk
+  user_id_env: THREADS_USER_ID_LIFESTYLE
+  token_env: THREADS_TOKEN_LIFESTYLE
+- type: bluesky
+  lang: en
+  handle_env: BSKY_HANDLE_LIFESTYLE
+  password_env: BSKY_PASSWORD_LIFESTYLE

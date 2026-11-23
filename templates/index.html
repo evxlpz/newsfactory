@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block main %}
+<h1 class="page-h">{{ heading or ui.latest }}</h1>
+{% if items %}
+{% set lead = items[0] if page == 1 and not heading else None %}
+{% if lead %}
+<article class="lead">
+  <a href="{{ lead.url }}" class="lead-img"><img src="{{ lead.img }}" alt="" width="1200" height="630"></a>
+  <div>
+    <span class="cat">{{ lead.cat }}</span>
+    <h2><a href="{{ lead.url }}">{{ lead.v.title }}</a></h2>
+    <p class="dek">{{ lead.v.dek }}</p>
+    <time datetime="{{ lead.a.created|iso }}">{{ lead.a.created|date }}</time>
+  </div>
+</article>
+{% endif %}
+<div class="grid">
+{% for i in (items[1:] if lead else items) %}
+  <article class="card">
+    <a href="{{ i.url }}"><img src="{{ i.img }}" alt="" loading="lazy" width="1200" height="630"></a>
+    <span class="cat">{{ i.cat }}</span>
+    <h3><a href="{{ i.url }}">{{ i.v.title }}</a></h3>
+    <time datetime="{{ i.a.created|iso }}">{{ i.a.created|date }}</time>
+  </article>
+{% endfor %}
+</div>
+{% if pages > 1 %}<nav class="pager">
+  {% if page > 1 %}<a href="{{ pre }}{% if page > 2 %}page/{{ page - 1 }}/{% endif %}">← {{ ui.newer }}</a>{% endif %}
+  <span>{{ ui.page }} {{ page }} / {{ pages }}</span>
+  {% if page < pages %}<a href="{{ pre }}page/{{ page + 1 }}/">{{ ui.older }} →</a>{% endif %}
+</nav>{% endif %}
+{% endif %}
+{% endblock %}
