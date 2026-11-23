@@ -13,6 +13,11 @@ langs:
 - de
 - it
 - pt
+- ru
+- zh
+- ja
+- ko
+- tr
 topic: головні новини України і світу
 editorial: Нейтральна подача без оцінок і емоцій. Тільки підтверджені факти, кожну заяву приписуємо джерелу («за даними…»,
   «заявив…»). Не публікуємо чутки, не робимо прогнозів. Не розкриваємо позиції/наслідки ударів, якщо джерело їх не оприлюднило
@@ -26,6 +31,11 @@ tagline:
   de: Ukraine und Welt – kurz und sachlich.
   it: Ucraina e mondo, in breve e con i fatti.
   pt: Ucrânia e mundo, curto e direto aos fatos.
+  ru: главное об Украине и мире — коротко и по фактам.
+  zh: 乌克兰与世界要闻，简明真实。
+  ja: ウクライナと世界のニュースを簡潔に事実ベースで。
+  ko: 우크라이나와 세계 뉴스, 짧고 사실대로.
+  tr: Ukrayna ve dünya haberleri, kısa ve olgulara dayalı.
 colors:
   accent: '#1F6FEB'
   accent_ink: '#ffffff'
@@ -46,6 +56,11 @@ category_labels:
     de: Ukraine
     it: Ucraina
     pt: Ucrânia
+    ru: Украина
+    zh: 乌克兰
+    ja: ウクライナ
+    ko: 우크라이나
+    tr: Ukrayna
   world:
     uk: Світ
     en: World
@@ -55,6 +70,11 @@ category_labels:
     de: Welt
     it: Mondo
     pt: Mundo
+    ru: Мир
+    zh: 国际
+    ja: 世界
+    ko: 세계
+    tr: Dünya
   economy:
     uk: Економіка
     en: Economy
@@ -64,6 +84,11 @@ category_labels:
     de: Wirtschaft
     it: Economia
     pt: Economia
+    ru: Экономика
+    zh: 经济
+    ja: 経済
+    ko: 경제
+    tr: Ekonomi
   tech:
     uk: Технології
     en: Tech
@@ -73,6 +98,11 @@ category_labels:
     de: Technik
     it: Tecnologia
     pt: Tecnologia
+    ru: Технологии
+    zh: 科技
+    ja: テクノロジー
+    ko: 기술
+    tr: Teknoloji
   society:
     uk: Суспільство
     en: Society
@@ -82,6 +112,11 @@ category_labels:
     de: Gesellschaft
     it: Società
     pt: Sociedade
+    ru: Общество
+    zh: 社会
+    ja: 社会
+    ko: 사회
+    tr: Toplum
 sources:
 - https://www.ukrinform.ua/rss/block-lastnews
 - https://suspilne.media/rss/all.rss

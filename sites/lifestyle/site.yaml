@@ -13,6 +13,11 @@ langs:
 - de
 - it
 - pt
+- ru
+- zh
+- ja
+- ko
+- tr
 topic: цікава наука, космос, тварини, історія, дивні й незвичні новини зі світу
 editorial: Легкий, живий тон, але без вигадок. Факти — з джерела. Заголовок інтригує, але не бреше.
 tagline:
@@ -24,6 +29,11 @@ tagline:
   de: Seltsam, staunenswert und wahr.
   it: Strano, sorprendente e vero.
   pt: Estranho, incrível e verdadeiro.
+  ru: странное, интересное и невероятное — но правда.
+  zh: 奇特、有趣又难以置信——但都是真的。
+  ja: 奇妙で面白くて信じがたい、でも本当の話。
+  ko: 이상하고 신기하고 놀라운, 하지만 진짜 이야기.
+  tr: Tuhaf, ilginç ve inanılmaz — ama gerçek.
 colors:
   accent: '#F59E0B'
   accent_ink: '#111111'
@@ -44,6 +54,11 @@ category_labels:
     de: Wissenschaft
     it: Scienza
     pt: Ciência
+    ru: Наука
+    zh: 科学
+    ja: 科学
+    ko: 과학
+    tr: Bilim
   space:
     uk: Космос
     en: Space
@@ -53,6 +68,11 @@ category_labels:
     de: Weltraum
     it: Spazio
     pt: Espaço
+    ru: Космос
+    zh: 太空
+    ja: 宇宙
+    ko: 우주
+    tr: Uzay
   animals:
     uk: Тварини
     en: Animals
@@ -62,6 +82,11 @@ category_labels:
     de: Tiere
     it: Animali
     pt: Animais
+    ru: Животные
+    zh: 动物
+    ja: 動物
+    ko: 동물
+    tr: Hayvanlar
   history:
     uk: Історія
     en: History
@@ -71,6 +96,11 @@ category_labels:
     de: Geschichte
     it: Storia
     pt: História
+    ru: История
+    zh: 历史
+    ja: 歴史
+    ko: 역사
+    tr: Tarih
   weird:
     uk: Дивне
     en: Weird
@@ -80,6 +110,11 @@ category_labels:
     de: Kurios
     it: Curiosità
     pt: Curiosidades
+    ru: Странное
+    zh: 奇闻
+    ja: 珍ニュース
+    ko: 별난 이야기
+    tr: Tuhaf
 sources:
 - https://www.sciencealert.com/feed
 - https://www.livescience.com/feeds/all

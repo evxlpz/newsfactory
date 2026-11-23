@@ -13,6 +13,11 @@ langs:
 - de
 - it
 - pt
+- ru
+- zh
+- ja
+- ko
+- tr
 ymyl: true
 topic: здоров'я, медичні дослідження, зір і очі, краса, харчування, спорт і сон
 editorial: Тільки новини досліджень і офіційних організацій (ВООЗ, МОЗ, університети). Не даємо медичних порад; де доречно
@@ -26,6 +31,11 @@ tagline:
   de: Gesundheit und Körperwissen – ohne Mythen.
   it: Salute e scienza del corpo, senza miti.
   pt: Saúde e ciência do corpo, sem mitos.
+  ru: новости здоровья и науки о теле — без мифов.
+  zh: 健康与人体科学新闻，拒绝谣言。
+  ja: 健康と体の科学ニュースを、迷信抜きで。
+  ko: 건강과 인체 과학 뉴스, 근거 없는 이야기는 빼고.
+  tr: Sağlık ve beden bilimi haberleri, mitler olmadan.
 colors:
   accent: '#E5484D'
   accent_ink: '#ffffff'
@@ -46,6 +56,11 @@ category_labels:
     de: Forschung
     it: Ricerca
     pt: Pesquisa
+    ru: Исследования
+    zh: 研究
+    ja: 研究
+    ko: 연구
+    tr: Araştırma
   vision:
     uk: Зір
     en: Vision
@@ -55,6 +70,11 @@ category_labels:
     de: Augen
     it: Vista
     pt: Visão
+    ru: Зрение
+    zh: 视力
+    ja: 目の健康
+    ko: 시력
+    tr: Göz sağlığı
   beauty:
     uk: Краса
     en: Beauty
@@ -64,6 +84,11 @@ category_labels:
     de: Schönheit
     it: Bellezza
     pt: Beleza
+    ru: Красота
+    zh: 美容
+    ja: 美容
+    ko: 뷰티
+    tr: Güzellik
   fitness:
     uk: Спорт і сон
     en: Fitness & sleep
@@ -73,6 +98,11 @@ category_labels:
     de: Sport & Schlaf
     it: Sport e sonno
     pt: Esporte e sono
+    ru: Спорт и сон
+    zh: 运动与睡眠
+    ja: 運動と睡眠
+    ko: 운동과 수면
+    tr: Spor ve uyku
   medicine:
     uk: Медицина
     en: Medicine
@@ -82,6 +112,11 @@ category_labels:
     de: Medizin
     it: Medicina
     pt: Medicina
+    ru: Медицина
+    zh: 医学
+    ja: 医療
+    ko: 의학
+    tr: Tıp
 sources:
 - https://www.sciencedaily.com/rss/health_medicine.xml
 - https://medicalxpress.com/rss-feed/

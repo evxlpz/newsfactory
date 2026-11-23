@@ -6,7 +6,7 @@ import time
 
 import nh3
 
-from .common import CONTENT_DIR, LANG_NAMES, log, sha, slugify, write_json
+from .common import CJK, CONTENT_DIR, LANG_NAMES, PROMPT_LANG, log, sha, slugify, write_json
 from .gemini import QuotaExhausted
 
 ALLOWED_TAGS = {"p", "h2", "h3", "ul", "ol", "li", "strong", "em", "blockquote", "a", "br"}
@@ -24,7 +24,7 @@ UK_STYLE = """Правила української (обов'язково дл�
 
 def _prompt(cfg: dict, item: dict, fulltext: str) -> str:
     langs = cfg["langs"]
-    lang_list = ", ".join(f"{l} ({LANG_NAMES.get(l, l)})" for l in langs)
+    lang_list = ", ".join(f"{l} ({PROMPT_LANG.get(l, LANG_NAMES.get(l, l))})" for l in langs)
     cats = ", ".join(cfg.get("categories", ["news"]))
     ymyl = ""
     if cfg.get("ymyl"):
@@ -67,11 +67,11 @@ def _sanitize(html_text: str) -> str:
     return nh3.clean(html_text, tags=ALLOWED_TAGS, attributes={"a": {"href"}}, link_rel="nofollow noopener")
 
 
-CHUNK = 4  # мов за один запит (щоб відповідь гарантовано влізла)
+CHUNK = 5  # мов за один запит (щоб відповідь гарантовано влізла)
 
 
 def _adapt_prompt(cfg: dict, base: dict, langs: list[str]) -> str:
-    lang_list = ", ".join(f"{l} ({LANG_NAMES.get(l, l)})" for l in langs)
+    lang_list = ", ".join(f"{l} ({PROMPT_LANG.get(l, LANG_NAMES.get(l, l))})" for l in langs)
     return f"""Ти — редактор видання «{cfg['name']}» ({cfg['topic']}).
 Нижче готовий матеріал англійською. Напиши його версії мовами: {lang_list}.
 Це не дослівний переклад: природна мова носія, місцеві норми (лапки, числа, валюта), ті самі факти —
@@ -129,6 +129,12 @@ def rewrite(cfg: dict, item: dict, fulltext: str, gemini) -> dict | None:
             v = _accept((more.get("langs") or {}).get(lang))
             if v:
                 langs_out[lang] = v
+
+    # для китайської/японської/корейської — читабельний латинський slug з англійської версії
+    en_slug = langs_out.get("en", langs_out[cfg["default_lang"]])["slug"]
+    for lang, v in langs_out.items():
+        if lang in CJK or v["slug"] == "post":
+            v["slug"] = en_slug
 
     cats = cfg.get("categories", ["news"])
     art = {

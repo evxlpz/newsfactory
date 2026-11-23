@@ -13,6 +13,11 @@ langs:
 - de
 - it
 - pt
+- ru
+- zh
+- ja
+- ko
+- tr
 ymyl: true
 topic: економіка, фінансові ринки, криптовалюти, компанії, економіка України
 editorial: 'Пишемо зрозуміло для звичайних людей: що сталося, які цифри, як це може вплинути на гаманець. Жодних інвестиційних
@@ -26,6 +31,11 @@ tagline:
   de: Geld, Märkte und Krypto – ohne Füllstoff.
   it: Soldi, mercati e cripto, senza fronzoli.
   pt: Dinheiro, mercados e cripto, sem enrolação.
+  ru: деньги, рынки и крипта без воды.
+  zh: 财经、市场与加密货币，干货直达。
+  ja: お金・市場・暗号資産のニュースを簡潔に。
+  ko: 돈, 시장, 암호화폐 뉴스를 핵심만.
+  tr: Para, piyasalar ve kripto, lafı uzatmadan.
 colors:
   accent: '#12A150'
   accent_ink: '#ffffff'
@@ -46,6 +56,11 @@ category_labels:
     de: Wirtschaft
     it: Economia
     pt: Economia
+    ru: Экономика
+    zh: 经济
+    ja: 経済
+    ko: 경제
+    tr: Ekonomi
   markets:
     uk: Ринки
     en: Markets
@@ -55,6 +70,11 @@ category_labels:
     de: Märkte
     it: Mercati
     pt: Mercados
+    ru: Рынки
+    zh: 市场
+    ja: 市場
+    ko: 시장
+    tr: Piyasalar
   crypto:
     uk: Крипта
     en: Crypto
@@ -64,6 +84,11 @@ category_labels:
     de: Krypto
     it: Cripto
     pt: Cripto
+    ru: Крипта
+    zh: 加密货币
+    ja: 暗号資産
+    ko: 암호화폐
+    tr: Kripto
   companies:
     uk: Компанії
     en: Companies
@@ -73,6 +98,11 @@ category_labels:
     de: Unternehmen
     it: Aziende
     pt: Empresas
+    ru: Компании
+    zh: 公司
+    ja: 企業
+    ko: 기업
+    tr: Şirketler
   ukraine:
     uk: Україна
     en: Ukraine
@@ -82,6 +112,11 @@ category_labels:
     de: Ukraine
     it: Ucraina
     pt: Ucrânia
+    ru: Украина
+    zh: 乌克兰
+    ja: ウクライナ
+    ko: 우크라이나
+    tr: Ukrayna
 sources:
 - https://www.coindesk.com/arc/outboundfeeds/rss/
 - https://cointelegraph.com/rss

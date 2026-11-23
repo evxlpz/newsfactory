@@ -10,8 +10,10 @@
 - `.github/workflows/run.yml` — щогодини; понеділок — тижневий звіт у Telegram.
 
 ## Правила
-- Мови на всіх сайтах: uk, en, pl, es, fr, de, it, pt. Перший запит до Gemini — uk+en+pl+es з джерела,
-  другий — fr/de/it/pt з англійської версії. Тобто 2 запити на статтю → для 5 сайтів потрібно 2–3 ключі Gemini.
+- Мови на всіх сайтах (13): uk, en, pl, es, fr, de, it, pt, ru, zh, ja, ko, tr. Перший запит до Gemini —
+  uk+en+pl+es+fr з джерела, далі по 5 мов з англійської версії → 3 запити на статтю → потрібно 3–5 ключів Gemini.
+- zh/ja/ko: обкладинки шрифтом Noto Sans CJK (apt fonts-noto-cjk у workflow), перенос по символах, slug з англійської.
+- Нова мова: додати UI в engine/i18n.py, назву в LANG_NAMES, tagline і category_labels у кожен site.yaml.
 - Назва видання: кирилицею для uk, `name_latin` для інших мов.
 - Gemini: тільки безкоштовний API і flash-lite (`gemini-flash-lite-latest`). Кілька ключів: GEMINI_API_KEY, GEMINI_API_KEY_2…
 - Токени ніколи не в коді й не в yaml — у yaml лише НАЗВИ secret-змінних. Усі Secrets доходять у рушій через `SECRETS_JSON`.

@@ -129,9 +129,78 @@ UI = {
                         "usar cookies de publicidade. Não coletamos dados pessoais por formulários. Gerencie os "
                         "cookies nas Configurações de anúncios do Google.",
         "contact": "Contato",
+    },    "ru": {
+        "latest": "Последние новости", "read_more": "Читать", "source": "Источник",
+        "why": "Почему это важно", "about": "О проекте", "privacy": "Конфиденциальность",
+        "older": "Старше", "newer": "Новее", "page": "Страница", "home": "Главная",
+        "ai_note": "Материал подготовлен редакцией с использованием ИИ на основе публикации источника. "
+                   "Мы проверяем факты по первоисточнику и всегда даём на него ссылку.",
+        "ymyl_note": "Материал носит информационный характер и не является медицинской или финансовой консультацией.",
+        "related": "Ещё по теме", "notfound": "Страница не найдена", "rss": "RSS",
+        "about_text": "{name} — {tagline} Каждый день мы отбираем главные новости из проверенных источников, "
+                      "объясняем их простым языком и всегда ссылаемся на первоисточник. "
+                      "Тексты готовятся с помощью инструментов ИИ под контролем редакции.",
+        "privacy_text": "Сайт использует анонимную аналитику и может показывать рекламу Google. Google и партнёры "
+                        "могут использовать cookie для показа рекламы. Мы не собираем персональные данные через "
+                        "формы. Управлять рекламными cookie можно в настройках рекламы Google.",
+        "contact": "Связь",
+    },
+    "zh": {
+        "latest": "最新新闻", "read_more": "阅读", "source": "来源",
+        "why": "为什么重要", "about": "关于我们", "privacy": "隐私政策",
+        "older": "更早", "newer": "更新", "page": "页", "home": "首页",
+        "ai_note": "本文由编辑部借助人工智能根据原始报道整理，我们会对照原始来源核实事实并始终附上链接。",
+        "ymyl_note": "本文仅供参考，不构成医疗或财务建议。",
+        "related": "相关阅读", "notfound": "页面未找到", "rss": "RSS",
+        "about_text": "{name} — {tagline} 我们每天从可靠来源精选重要新闻，用通俗的语言解读，并始终注明原始出处。"
+                      "文章在编辑监督下借助人工智能工具完成。",
+        "privacy_text": "本网站使用匿名访问统计，并可能展示 Google 广告。Google 及其合作伙伴可能使用 Cookie 投放广告。"
+                        "我们不会通过表单收集个人数据。您可以在 Google 广告设置中管理广告 Cookie。",
+        "contact": "联系",
+    },
+    "ja": {
+        "latest": "最新ニュース", "read_more": "読む", "source": "出典",
+        "why": "なぜ重要か", "about": "私たちについて", "privacy": "プライバシー",
+        "older": "前へ", "newer": "次へ", "page": "ページ", "home": "ホーム",
+        "ai_note": "この記事は元の報道をもとに、編集部がAIを活用して作成しました。事実は一次情報源で確認し、必ずリンクを掲載しています。",
+        "ymyl_note": "この記事は情報提供のみを目的としており、医療・金融上の助言ではありません。",
+        "related": "関連記事", "notfound": "ページが見つかりません", "rss": "RSS",
+        "about_text": "{name} — {tagline} 信頼できる情報源から毎日主要なニュースを選び、わかりやすく解説し、必ず元記事を紹介します。"
+                      "記事は編集部の監修のもとAIツールを使って作成しています。",
+        "privacy_text": "当サイトは匿名のアクセス解析を使用し、Google 広告を表示することがあります。Google とパートナーは広告配信に "
+                        "Cookie を使用する場合があります。フォームで個人情報を収集することはありません。広告 Cookie は Google の広告設定で管理できます。",
+        "contact": "お問い合わせ",
+    },
+    "ko": {
+        "latest": "최신 뉴스", "read_more": "읽기", "source": "출처",
+        "why": "왜 중요한가", "about": "소개", "privacy": "개인정보처리방침",
+        "older": "이전", "newer": "최신", "page": "페이지", "home": "홈",
+        "ai_note": "이 기사는 원 보도를 바탕으로 편집팀이 AI의 도움을 받아 작성했습니다. 사실은 원출처에서 확인하며 항상 링크를 제공합니다.",
+        "ymyl_note": "이 기사는 정보 제공용이며 의료 또는 금융 조언이 아닙니다.",
+        "related": "관련 기사", "notfound": "페이지를 찾을 수 없습니다", "rss": "RSS",
+        "about_text": "{name} — {tagline} 매일 신뢰할 수 있는 출처에서 주요 뉴스를 골라 쉽게 설명하고 항상 원문을 링크합니다. "
+                      "기사는 편집팀의 감독 아래 AI 도구로 작성됩니다.",
+        "privacy_text": "이 사이트는 익명 방문 분석을 사용하며 Google 광고를 표시할 수 있습니다. Google과 파트너는 광고 제공을 위해 "
+                        "쿠키를 사용할 수 있습니다. 양식을 통해 개인정보를 수집하지 않습니다. 광고 쿠키는 Google 광고 설정에서 관리할 수 있습니다.",
+        "contact": "문의",
+    },
+    "tr": {
+        "latest": "Son haberler", "read_more": "Oku", "source": "Kaynak",
+        "why": "Neden önemli", "about": "Hakkımızda", "privacy": "Gizlilik",
+        "older": "Daha eski", "newer": "Daha yeni", "page": "Sayfa", "home": "Ana sayfa",
+        "ai_note": "Bu haber, orijinal yayına dayanarak editörlerimiz tarafından yapay zekâ yardımıyla hazırlandı. "
+                   "Bilgileri kaynağından doğruluyor ve her zaman bağlantı veriyoruz.",
+        "ymyl_note": "Bu makale yalnızca bilgilendirme amaçlıdır; tıbbi veya finansal tavsiye değildir.",
+        "related": "Konuyla ilgili", "notfound": "Sayfa bulunamadı", "rss": "RSS",
+        "about_text": "{name} — {tagline} Her gün güvenilir kaynaklardan önemli haberleri seçiyor, sade bir dille "
+                      "anlatıyor ve her zaman orijinaline bağlantı veriyoruz. Metinler editör denetiminde yapay zekâ "
+                      "araçlarıyla hazırlanır.",
+        "privacy_text": "Bu site anonim ziyaret analizi kullanır ve Google reklamları gösterebilir. Google ve ortakları "
+                        "reklam için çerez kullanabilir. Formlar aracılığıyla kişisel veri toplamıyoruz. Reklam "
+                        "çerezlerini Google Reklam Ayarları'ndan yönetebilirsiniz.",
+        "contact": "İletişim",
     },
 }
-
 
 def t(lang: str) -> dict:
     return UI.get(lang, UI["en"])

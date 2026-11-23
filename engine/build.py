@@ -82,7 +82,7 @@ def build_site(cfg: dict) -> Path:
         def card(a, _lang=lang):
             key = f"{a['id']}-{_lang}"
             src = make_card(cfg, a["langs"][_lang]["card_title"], cat_label(cfg, a["category"], _lang), key,
-                            brand(cfg, _lang))
+                            brand(cfg, _lang), _lang)
             dst = out / "img" / f"{key}.png"
             if not dst.exists():
                 shutil.copy(src, dst)

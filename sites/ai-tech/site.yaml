@@ -13,6 +13,11 @@ langs:
 - de
 - it
 - pt
+- ru
+- zh
+- ja
+- ko
+- tr
 topic: штучний інтелект, технології, гаджети, софт, наука про технології
 editorial: Пишемо для людей, яким цікаві технології, але без зайвого жаргону. Пояснюємо терміни одним реченням.
 tagline:
@@ -24,6 +29,11 @@ tagline:
   de: KI- und Tech-News, verständlich erklärt.
   it: Notizie su IA e tecnologia, in parole semplici.
   pt: Notícias de IA e tecnologia em linguagem simples.
+  ru: новости искусственного интеллекта и технологий простым языком.
+  zh: 用通俗语言讲述人工智能与科技新闻。
+  ja: AIとテクノロジーのニュースをわかりやすく。
+  ko: AI와 기술 뉴스를 쉽게 전합니다.
+  tr: Yapay zekâ ve teknoloji haberleri, sade bir dille.
 colors:
   accent: '#6D5DF6'
   accent_ink: '#ffffff'
@@ -44,6 +54,11 @@ category_labels:
     de: KI
     it: IA
     pt: IA
+    ru: ИИ
+    zh: 人工智能
+    ja: AI
+    ko: AI
+    tr: Yapay zekâ
   gadgets:
     uk: Гаджети
     en: Gadgets
@@ -53,6 +68,11 @@ category_labels:
     de: Gadgets
     it: Gadget
     pt: Gadgets
+    ru: Гаджеты
+    zh: 数码
+    ja: ガジェット
+    ko: 가젯
+    tr: Cihazlar
   software:
     uk: Софт
     en: Software
@@ -62,6 +82,11 @@ category_labels:
     de: Software
     it: Software
     pt: Software
+    ru: Софт
+    zh: 软件
+    ja: ソフトウェア
+    ko: 소프트웨어
+    tr: Yazılım
   science:
     uk: Наука
     en: Science
@@ -71,6 +96,11 @@ category_labels:
     de: Wissenschaft
     it: Scienza
     pt: Ciência
+    ru: Наука
+    zh: 科学
+    ja: 科学
+    ko: 과학
+    tr: Bilim
   business:
     uk: Бізнес
     en: Business
@@ -80,6 +110,11 @@ category_labels:
     de: Wirtschaft
     it: Business
     pt: Negócios
+    ru: Бизнес
+    zh: 商业
+    ja: ビジネス
+    ko: 비즈니스
+    tr: İş dünyası
 sources:
 - https://techcrunch.com/feed/
 - https://www.theverge.com/rss/index.xml

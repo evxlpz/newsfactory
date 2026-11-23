@@ -29,8 +29,14 @@ if os.environ.get("SECRETS_JSON"):
 LANG_NAMES = {
     "uk": "Українська", "en": "English", "pl": "Polski",
     "es": "Español", "fr": "Français", "de": "Deutsch",
-    "it": "Italiano", "pt": "Português",
+    "it": "Italiano", "pt": "Português", "ru": "Русский",
+    "zh": "中文", "ja": "日本語", "ko": "한국어", "tr": "Türkçe",
 }
+
+
+CJK = {"zh", "ja", "ko"}
+# як називати мову в промпті для Gemini
+PROMPT_LANG = {"zh": "Simplified Chinese / 简体中文"}
 
 
 def log(msg: str) -> None:
