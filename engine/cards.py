@@ -44,7 +44,7 @@ def _wrap(draw, text: str, font, max_w: int, max_lines: int) -> list[str]:
     return lines
 
 
-def make_card(cfg: dict, title: str, label: str, key: str) -> Path:
+def make_card(cfg: dict, title: str, label: str, key: str, name: str | None = None) -> Path:
     """Повертає шлях до PNG у кеші (генерує, якщо нема)."""
     path = CACHE / cfg["id"] / f"{key}.png"
     if path.exists():
@@ -76,6 +76,6 @@ def make_card(cfg: dict, title: str, label: str, key: str) -> Path:
         y += int(size * 1.22)
     # назва сайту знизу
     nf = _font("bold", 30)
-    d.text((pad, H - pad - 30), cfg["name"], font=nf, fill=accent)
+    d.text((pad, H - pad - 30), name or cfg["name"], font=nf, fill=accent)
     img.save(path, "PNG", optimize=True)
     return path

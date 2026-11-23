@@ -11,7 +11,7 @@ from xml.sax.saxutils import escape
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from .cards import make_card
-from .common import CONTENT_DIR, LANG_NAMES, OUT_DIR, STATIC_DIR, TEMPLATES_DIR, log, read_json, site_url
+from .common import CONTENT_DIR, LANG_NAMES, brand, OUT_DIR, STATIC_DIR, TEMPLATES_DIR, log, read_json, site_url
 from .i18n import t
 
 PER_PAGE = 24
@@ -73,7 +73,7 @@ def build_site(cfg: dict) -> Path:
         ui = t(lang)
         la = [a for a in arts if lang in a["langs"]]
         common = {
-            "cfg": cfg, "lang": lang, "ui": ui, "base": base, "pre": prefix(cfg, lang),
+            "cfg": cfg, "lang": lang, "ui": ui, "brand": brand(cfg, lang), "base": base, "pre": prefix(cfg, lang),
             "langs": cfg["langs"], "lang_names": LANG_NAMES,
             "tagline": cfg["tagline"].get(lang, ""), "year": time.gmtime().tm_year,
             "cats": [(c, cat_label(cfg, c, lang)) for c in cfg.get("categories", [])],
@@ -81,7 +81,8 @@ def build_site(cfg: dict) -> Path:
 
         def card(a, _lang=lang):
             key = f"{a['id']}-{_lang}"
-            src = make_card(cfg, a["langs"][_lang]["card_title"], cat_label(cfg, a["category"], _lang), key)
+            src = make_card(cfg, a["langs"][_lang]["card_title"], cat_label(cfg, a["category"], _lang), key,
+                            brand(cfg, _lang))
             dst = out / "img" / f"{key}.png"
             if not dst.exists():
                 shutil.copy(src, dst)
@@ -125,8 +126,8 @@ def build_site(cfg: dict) -> Path:
                 "image": [base + it["img"]], "inLanguage": lang,
                 "datePublished": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(a["created"])),
                 "dateModified": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(a["created"])),
-                "author": {"@type": "Organization", "name": cfg["name"], "url": base},
-                "publisher": {"@type": "Organization", "name": cfg["name"], "url": base},
+                "author": {"@type": "Organization", "name": common["brand"], "url": base},
+                "publisher": {"@type": "Organization", "name": common["brand"], "url": base},
                 "mainEntityOfPage": base + it["url"],
                 "isBasedOn": a["source"]["link"],
             }
@@ -139,7 +140,7 @@ def build_site(cfg: dict) -> Path:
         # про нас / конфіденційність
         for slug, key in (("about", "about_text"), ("privacy", "privacy_text")):
             rel = f"{common['pre']}{slug}/"
-            body = ui[key].format(name=cfg["name"], tagline=common["tagline"])
+            body = ui[key].format(name=common["brand"], tagline=common["tagline"])
             _write(out, rel, tpl.get_template("page.html").render(
                 **common, title=ui[slug if slug == "about" else "privacy"], body=body,
                 canonical=base + rel, alternates={l: base + f"{prefix(cfg, l)}{slug}/" for l in cfg["langs"]}))
@@ -154,14 +155,14 @@ def build_site(cfg: dict) -> Path:
         (out / common["pre"].lstrip("/")).mkdir(parents=True, exist_ok=True)
         (out / common["pre"].lstrip("/") / "feed.xml").write_text(
             f'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel>'
-            f"<title>{escape(cfg['name'])}</title><link>{base}{common['pre']}</link>"
+            f"<title>{escape(common['brand'])}</title><link>{base}{common['pre']}</link>"
             f"<description>{escape(common['tagline'])}</description><language>{lang}</language>"
             f"{rss_items}</channel></rss>", encoding="utf-8")
 
     # 404
     ui = t(cfg["default_lang"])
     (out / "404.html").write_text(tpl.get_template("page.html").render(
-        cfg=cfg, lang=cfg["default_lang"], ui=ui, base=base, pre="/", langs=cfg["langs"], lang_names=LANG_NAMES,
+        cfg=cfg, lang=cfg["default_lang"], ui=ui, brand=brand(cfg, cfg["default_lang"]), base=base, pre="/", langs=cfg["langs"], lang_names=LANG_NAMES,
         tagline=cfg["tagline"].get(cfg["default_lang"], ""), year=time.gmtime().tm_year,
         cats=[(c, cat_label(cfg, c, cfg["default_lang"])) for c in cfg.get("categories", [])],
         title=ui["notfound"], body="", canonical=base + "/", alternates={}), encoding="utf-8")
@@ -189,7 +190,7 @@ def _sitemaps(cfg, out: Path, base: str, urls) -> None:
         'xmlns:xhtml="http://www.w3.org/1999/xhtml">' + "".join(rows) + "</urlset>", encoding="utf-8")
     cutoff = time.time() - 48 * 3600
     news = "".join(
-        f"<url><loc>{base}{rel}</loc><news:news><news:publication><news:name>{escape(cfg['name'])}</news:name>"
+        f"<url><loc>{base}{rel}</loc><news:news><news:publication><news:name>{escape(brand(cfg, meta['lang']))}</news:name>"
         f"<news:language>{meta['lang']}</news:language></news:publication>"
         f"<news:publication_date>{time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(ts))}</news:publication_date>"
         f"<news:title>{escape(meta['title'])}</news:title></news:news></url>"

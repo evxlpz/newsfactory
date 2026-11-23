@@ -1,18 +1,29 @@
 # Сайт «Нейрон». Токени соцмереж — тільки назви secret-змінних, самі значення в GitHub Secrets.
 # domain: null → працює на neiron-news.pages.dev; коли купимо домен — вписати сюди.
 name: Нейрон
+name_latin: Neiron
 pages_project: neiron-news
 domain: null
 langs:
 - uk
 - en
 - pl
+- es
+- fr
+- de
+- it
+- pt
 topic: штучний інтелект, технології, гаджети, софт, наука про технології
 editorial: Пишемо для людей, яким цікаві технології, але без зайвого жаргону. Пояснюємо терміни одним реченням.
 tagline:
   uk: новини штучного інтелекту й технологій простою мовою.
   en: AI and tech news in plain language.
   pl: Wiadomości o AI i technologiach prostym językiem.
+  es: Noticias de IA y tecnología en lenguaje sencillo.
+  fr: L'actu de l'IA et de la tech, simplement.
+  de: KI- und Tech-News, verständlich erklärt.
+  it: Notizie su IA e tecnologia, in parole semplici.
+  pt: Notícias de IA e tecnologia em linguagem simples.
 colors:
   accent: '#6D5DF6'
   accent_ink: '#ffffff'
@@ -28,22 +39,47 @@ category_labels:
     uk: ШІ
     en: AI
     pl: AI
+    es: IA
+    fr: IA
+    de: KI
+    it: IA
+    pt: IA
   gadgets:
     uk: Гаджети
     en: Gadgets
     pl: Gadżety
+    es: Gadgets
+    fr: Gadgets
+    de: Gadgets
+    it: Gadget
+    pt: Gadgets
   software:
     uk: Софт
     en: Software
     pl: Oprogramowanie
+    es: Software
+    fr: Logiciels
+    de: Software
+    it: Software
+    pt: Software
   science:
     uk: Наука
     en: Science
     pl: Nauka
+    es: Ciencia
+    fr: Science
+    de: Wissenschaft
+    it: Scienza
+    pt: Ciência
   business:
     uk: Бізнес
     en: Business
     pl: Biznes
+    es: Negocios
+    fr: Business
+    de: Wirtschaft
+    it: Business
+    pt: Negócios
 sources:
 - https://techcrunch.com/feed/
 - https://www.theverge.com/rss/index.xml

@@ -1,12 +1,18 @@
 # Сайт «Капітал». Токени соцмереж — тільки назви secret-змінних, самі значення в GitHub Secrets.
 # domain: null → працює на kapital-news.pages.dev; коли купимо домен — вписати сюди.
 name: Капітал
+name_latin: Kapital
 pages_project: kapital-news
 domain: null
 langs:
 - uk
 - en
 - pl
+- es
+- fr
+- de
+- it
+- pt
 ymyl: true
 topic: економіка, фінансові ринки, криптовалюти, компанії, економіка України
 editorial: 'Пишемо зрозуміло для звичайних людей: що сталося, які цифри, як це може вплинути на гаманець. Жодних інвестиційних
@@ -15,6 +21,11 @@ tagline:
   uk: гроші, ринки й крипта без води.
   en: Money, markets and crypto, no fluff.
   pl: Pieniądze, rynki i krypto bez lania wody.
+  es: Dinero, mercados y cripto, sin relleno.
+  fr: Argent, marchés et crypto, sans blabla.
+  de: Geld, Märkte und Krypto – ohne Füllstoff.
+  it: Soldi, mercati e cripto, senza fronzoli.
+  pt: Dinheiro, mercados e cripto, sem enrolação.
 colors:
   accent: '#12A150'
   accent_ink: '#ffffff'
@@ -30,22 +41,47 @@ category_labels:
     uk: Економіка
     en: Economy
     pl: Gospodarka
+    es: Economía
+    fr: Économie
+    de: Wirtschaft
+    it: Economia
+    pt: Economia
   markets:
     uk: Ринки
     en: Markets
     pl: Rynki
+    es: Mercados
+    fr: Marchés
+    de: Märkte
+    it: Mercati
+    pt: Mercados
   crypto:
     uk: Крипта
     en: Crypto
     pl: Krypto
+    es: Cripto
+    fr: Crypto
+    de: Krypto
+    it: Cripto
+    pt: Cripto
   companies:
     uk: Компанії
     en: Companies
     pl: Firmy
+    es: Empresas
+    fr: Entreprises
+    de: Unternehmen
+    it: Aziende
+    pt: Empresas
   ukraine:
     uk: Україна
     en: Ukraine
     pl: Ukraina
+    es: Ucrania
+    fr: Ukraine
+    de: Ukraine
+    it: Ucraina
+    pt: Ucrânia
 sources:
 - https://www.coindesk.com/arc/outboundfeeds/rss/
 - https://cointelegraph.com/rss

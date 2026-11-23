@@ -1,11 +1,13 @@
 """Переписування новини своїми словами під усі мови сайту одним запитом до Gemini."""
 from __future__ import annotations
 
+import json
 import time
 
 import nh3
 
-from .common import CONTENT_DIR, LANG_NAMES, sha, slugify, write_json
+from .common import CONTENT_DIR, LANG_NAMES, log, sha, slugify, write_json
+from .gemini import QuotaExhausted
 
 ALLOWED_TAGS = {"p", "h2", "h3", "ul", "ol", "li", "strong", "em", "blockquote", "a", "br"}
 
@@ -65,23 +67,69 @@ def _sanitize(html_text: str) -> str:
     return nh3.clean(html_text, tags=ALLOWED_TAGS, attributes={"a": {"href"}}, link_rel="nofollow noopener")
 
 
+CHUNK = 4  # мов за один запит (щоб відповідь гарантовано влізла)
+
+
+def _adapt_prompt(cfg: dict, base: dict, langs: list[str]) -> str:
+    lang_list = ", ".join(f"{l} ({LANG_NAMES.get(l, l)})" for l in langs)
+    return f"""Ти — редактор видання «{cfg['name']}» ({cfg['topic']}).
+Нижче готовий матеріал англійською. Напиши його версії мовами: {lang_list}.
+Це не дослівний переклад: природна мова носія, місцеві норми (лапки, числа, валюта), ті самі факти —
+нічого не додавай і не прибирай. Структура body_html та сама (<p>, <h2>, <ul>, <li>, <strong>, <blockquote>).
+social — 1–3 речення + 2–3 хештеги мовою версії. card_title — до 70 символів.
+
+Поверни тільки JSON: {{"langs": {{"<код мови>": {{"title": "...", "dek": "...", "body_html": "...",
+  "why": "...", "tags": ["..."], "social": "...", "card_title": "..."}}}}}}
+
+ORIGINAL (en):
+{json.dumps(base, ensure_ascii=False)}
+"""
+
+
+def _accept(v: dict | None) -> dict | None:
+    if not v or not v.get("title") or len(v.get("body_html", "")) < 600:
+        return None
+    v["body_html"] = _sanitize(v["body_html"])
+    v["title"] = v["title"].strip().rstrip(".")
+    v["card_title"] = (v.get("card_title") or v["title"])[:90]
+    v["slug"] = slugify(v["title"])
+    v["tags"] = [t.strip().lstrip("#") for t in v.get("tags", []) if t.strip()][:6]
+    return v
+
+
 def rewrite(cfg: dict, item: dict, fulltext: str, gemini) -> dict | None:
-    data = gemini.json(_prompt(cfg, item, fulltext))
+    langs = list(cfg["langs"])
+    first = [l for l in (cfg["default_lang"], "en") if l in langs]
+    first += [l for l in langs if l not in first][:max(0, CHUNK - len(first))]
+    rest = [l for l in langs if l not in first]
+
+    data = gemini.json(_prompt({**cfg, "langs": first}, item, fulltext))
     if data.get("skip"):
         return {"skip": True, "reason": data.get("skip_reason", "")}
     langs_out = {}
-    for lang in cfg["langs"]:
-        v = (data.get("langs") or {}).get(lang)
-        if not v or not v.get("title") or len(v.get("body_html", "")) < 600:
-            continue
-        v["body_html"] = _sanitize(v["body_html"])
-        v["title"] = v["title"].strip().rstrip(".")
-        v["card_title"] = (v.get("card_title") or v["title"])[:90]
-        v["slug"] = slugify(v["title"])
-        v["tags"] = [t.strip().lstrip("#") for t in v.get("tags", []) if t.strip()][:6]
-        langs_out[lang] = v
+    for lang in first:
+        v = _accept((data.get("langs") or {}).get(lang))
+        if v:
+            langs_out[lang] = v
     if cfg["default_lang"] not in langs_out:
         return {"skip": True, "reason": "немає основної мови в відповіді"}
+
+    base_lang = "en" if "en" in langs_out else cfg["default_lang"]
+    base = {k: langs_out[base_lang][k] for k in ("title", "dek", "body_html", "why", "tags")}
+    for i in range(0, len(rest), CHUNK):
+        part = rest[i:i + CHUNK]
+        try:
+            more = gemini.json(_adapt_prompt(cfg, base, part), temperature=0.4)
+        except QuotaExhausted:
+            raise
+        except (RuntimeError, ValueError) as e:
+            log(f"  мови {part} не вийшли: {e}")
+            continue
+        for lang in part:
+            v = _accept((more.get("langs") or {}).get(lang))
+            if v:
+                langs_out[lang] = v
+
     cats = cfg.get("categories", ["news"])
     art = {
         "id": time.strftime("%Y%m%d%H%M") + "-" + sha(item["link"])[:6],

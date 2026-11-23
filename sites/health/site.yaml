@@ -1,11 +1,18 @@
 # Сайт «Пульс». Токени соцмереж — тільки назви secret-змінних, самі значення в GitHub Secrets.
 # domain: null → працює на puls-health.pages.dev; коли купимо домен — вписати сюди.
 name: Пульс
+name_latin: Puls
 pages_project: puls-health
 domain: null
 langs:
 - uk
 - en
+- pl
+- es
+- fr
+- de
+- it
+- pt
 ymyl: true
 topic: здоров'я, медичні дослідження, зір і очі, краса, харчування, спорт і сон
 editorial: Тільки новини досліджень і офіційних організацій (ВООЗ, МОЗ, університети). Не даємо медичних порад; де доречно
@@ -13,6 +20,12 @@ editorial: Тільки новини досліджень і офіційних 
 tagline:
   uk: новини здоров'я та науки про тіло — без міфів.
   en: Health and body science news, minus the myths.
+  pl: Wiadomości o zdrowiu i nauce o ciele — bez mitów.
+  es: Noticias de salud y ciencia del cuerpo, sin mitos.
+  fr: Santé et science du corps, sans les mythes.
+  de: Gesundheit und Körperwissen – ohne Mythen.
+  it: Salute e scienza del corpo, senza miti.
+  pt: Saúde e ciência do corpo, sem mitos.
 colors:
   accent: '#E5484D'
   accent_ink: '#ffffff'
@@ -27,18 +40,48 @@ category_labels:
   research:
     uk: Дослідження
     en: Research
+    pl: Badania
+    es: Estudios
+    fr: Recherche
+    de: Forschung
+    it: Ricerca
+    pt: Pesquisa
   vision:
     uk: Зір
     en: Vision
+    pl: Wzrok
+    es: Visión
+    fr: Vision
+    de: Augen
+    it: Vista
+    pt: Visão
   beauty:
     uk: Краса
     en: Beauty
+    pl: Uroda
+    es: Belleza
+    fr: Beauté
+    de: Schönheit
+    it: Bellezza
+    pt: Beleza
   fitness:
     uk: Спорт і сон
     en: Fitness & sleep
+    pl: Sport i sen
+    es: Deporte y sueño
+    fr: Sport et sommeil
+    de: Sport & Schlaf
+    it: Sport e sonno
+    pt: Esporte e sono
   medicine:
     uk: Медицина
     en: Medicine
+    pl: Medycyna
+    es: Medicina
+    fr: Médecine
+    de: Medizin
+    it: Medicina
+    pt: Medicina
 sources:
 - https://www.sciencedaily.com/rss/health_medicine.xml
 - https://medicalxpress.com/rss-feed/

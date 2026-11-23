@@ -1,18 +1,29 @@
 # Сайт «Дивосвіт». Токени соцмереж — тільки назви secret-змінних, самі значення в GitHub Secrets.
 # domain: null → працює на dyvosvit.pages.dev; коли купимо домен — вписати сюди.
 name: Дивосвіт
+name_latin: Dyvosvit
 pages_project: dyvosvit
 domain: null
 langs:
 - uk
 - en
 - pl
+- es
+- fr
+- de
+- it
+- pt
 topic: цікава наука, космос, тварини, історія, дивні й незвичні новини зі світу
 editorial: Легкий, живий тон, але без вигадок. Факти — з джерела. Заголовок інтригує, але не бреше.
 tagline:
   uk: дивне, цікаве й неймовірне — але правда.
   en: Weird, wonderful and true.
   pl: Dziwne, ciekawe i prawdziwe.
+  es: Raro, asombroso y verdadero.
+  fr: Étrange, fascinant et vrai.
+  de: Seltsam, staunenswert und wahr.
+  it: Strano, sorprendente e vero.
+  pt: Estranho, incrível e verdadeiro.
 colors:
   accent: '#F59E0B'
   accent_ink: '#111111'
@@ -28,22 +39,47 @@ category_labels:
     uk: Наука
     en: Science
     pl: Nauka
+    es: Ciencia
+    fr: Science
+    de: Wissenschaft
+    it: Scienza
+    pt: Ciência
   space:
     uk: Космос
     en: Space
     pl: Kosmos
+    es: Espacio
+    fr: Espace
+    de: Weltraum
+    it: Spazio
+    pt: Espaço
   animals:
     uk: Тварини
     en: Animals
     pl: Zwierzęta
+    es: Animales
+    fr: Animaux
+    de: Tiere
+    it: Animali
+    pt: Animais
   history:
     uk: Історія
     en: History
     pl: Historia
+    es: Historia
+    fr: Histoire
+    de: Geschichte
+    it: Storia
+    pt: História
   weird:
     uk: Дивне
     en: Weird
     pl: Dziwne
+    es: Curioso
+    fr: Insolite
+    de: Kurios
+    it: Curiosità
+    pt: Curiosidades
 sources:
 - https://www.sciencealert.com/feed
 - https://www.livescience.com/feeds/all

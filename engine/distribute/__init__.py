@@ -9,7 +9,7 @@ import requests
 
 from ..build import art_path, load_articles
 from ..cards import CACHE
-from ..common import STATE_DIR, log, read_json, site_url, write_json
+from ..common import STATE_DIR, brand, log, read_json, site_url, write_json
 from ..i18n import t
 from .channels import CHANNELS, ChannelError
 
@@ -62,7 +62,7 @@ def distribute(cfg: dict) -> list[str]:
                 "title_html": html.escape(v["title"]), "social_html": html.escape(v["social"]),
                 "url": base + art_path(cfg, lang, a), "img_url": f"{base}/img/{img_key}.png",
                 "img_path": str(CACHE / cfg["id"] / f"{img_key}.png"),
-                "read_more": t(lang)["read_more"], "link_hint": f"{cfg['name']} — {base.replace('https://', '')}",
+                "read_more": t(lang)["read_more"], "link_hint": f"{brand(cfg, lang)} — {base.replace('https://', '')}",
             }
             try:
                 pid = ch.post(p)

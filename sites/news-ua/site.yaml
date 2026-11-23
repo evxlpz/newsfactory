@@ -1,11 +1,18 @@
 # Сайт «Стрічка». Токени соцмереж — тільки назви secret-змінних, самі значення в GitHub Secrets.
 # domain: null → працює на strichka-news.pages.dev; коли купимо домен — вписати сюди.
 name: Стрічка
+name_latin: Strichka
 pages_project: strichka-news
 domain: null
 langs:
 - uk
 - en
+- pl
+- es
+- fr
+- de
+- it
+- pt
 topic: головні новини України і світу
 editorial: Нейтральна подача без оцінок і емоцій. Тільки підтверджені факти, кожну заяву приписуємо джерелу («за даними…»,
   «заявив…»). Не публікуємо чутки, не робимо прогнозів. Не розкриваємо позиції/наслідки ударів, якщо джерело їх не оприлюднило
@@ -13,6 +20,12 @@ editorial: Нейтральна подача без оцінок і емоцій
 tagline:
   uk: головне за день — коротко й по факту.
   en: Ukraine and world news — short and factual.
+  pl: Wiadomości z Ukrainy i świata — krótko i rzeczowo.
+  es: Noticias de Ucrania y del mundo, breves y con datos.
+  fr: 'Ukraine et monde : court et factuel.'
+  de: Ukraine und Welt – kurz und sachlich.
+  it: Ucraina e mondo, in breve e con i fatti.
+  pt: Ucrânia e mundo, curto e direto aos fatos.
 colors:
   accent: '#1F6FEB'
   accent_ink: '#ffffff'
@@ -27,18 +40,48 @@ category_labels:
   ukraine:
     uk: Україна
     en: Ukraine
+    pl: Ukraina
+    es: Ucrania
+    fr: Ukraine
+    de: Ukraine
+    it: Ucraina
+    pt: Ucrânia
   world:
     uk: Світ
     en: World
+    pl: Świat
+    es: Mundo
+    fr: Monde
+    de: Welt
+    it: Mondo
+    pt: Mundo
   economy:
     uk: Економіка
     en: Economy
+    pl: Gospodarka
+    es: Economía
+    fr: Économie
+    de: Wirtschaft
+    it: Economia
+    pt: Economia
   tech:
     uk: Технології
     en: Tech
+    pl: Technologie
+    es: Tecnología
+    fr: Tech
+    de: Technik
+    it: Tecnologia
+    pt: Tecnologia
   society:
     uk: Суспільство
     en: Society
+    pl: Społeczeństwo
+    es: Sociedad
+    fr: Société
+    de: Gesellschaft
+    it: Società
+    pt: Sociedade
 sources:
 - https://www.ukrinform.ua/rss/block-lastnews
 - https://suspilne.media/rss/all.rss

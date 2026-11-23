@@ -28,7 +28,8 @@ if os.environ.get("SECRETS_JSON"):
 
 LANG_NAMES = {
     "uk": "Українська", "en": "English", "pl": "Polski",
-    "de": "Deutsch", "es": "Español", "fr": "Français",
+    "es": "Español", "fr": "Français", "de": "Deutsch",
+    "it": "Italiano", "pt": "Português",
 }
 
 
@@ -51,6 +52,11 @@ def load_sites(only: list[str] | None = None) -> list[dict]:
         cfg.setdefault("socials", {})
         sites.append(cfg)
     return sites
+
+
+def brand(cfg: dict, lang: str) -> str:
+    """Назва видання: кирилицею для uk, латиницею для інших мов."""
+    return cfg["name"] if lang == "uk" else cfg.get("name_latin") or cfg["name"]
 
 
 def site_url(cfg: dict) -> str:

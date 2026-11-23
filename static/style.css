@@ -13,9 +13,14 @@ img{max-width:100%;height:auto;display:block;border-radius:10px;background:var(-
 .top-row{display:flex;align-items:center;justify-content:space-between;height:60px}
 .logo{font-weight:800;font-size:22px;letter-spacing:-.02em}
 .logo::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--accent);margin-right:9px;vertical-align:2px}
-.langs{display:flex;gap:4px}
-.langs a{font-size:13px;font-weight:600;padding:4px 8px;border-radius:6px;color:var(--muted)}
-.langs a[aria-current]{background:var(--accent);color:var(--accent-ink)}
+.langs{position:relative}
+.langs summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:6px 10px;border:1px solid var(--line);border-radius:8px}
+.langs summary::-webkit-details-marker{display:none}
+.langs[open] summary{border-color:var(--accent)}
+.langs nav{position:absolute;right:0;top:calc(100% + 6px);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:6px;min-width:160px;box-shadow:0 8px 24px rgba(0,0,0,.12);display:flex;flex-direction:column}
+.langs nav a{font-size:14px;padding:7px 10px;border-radius:6px}
+.langs nav a:hover{background:var(--card);color:var(--fg)}
+.langs nav a[aria-current]{color:var(--accent);font-weight:700}
 .cats{display:flex;gap:18px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
 .cats::-webkit-scrollbar{display:none}
 .cats a{font-size:14px;font-weight:600;white-space:nowrap;color:var(--muted)}

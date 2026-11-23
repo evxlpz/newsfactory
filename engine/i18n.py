@@ -50,6 +50,86 @@ UI = {
                         "formularze. Ustawieniami reklam zarządzasz w Ustawieniach reklam Google.",
         "contact": "Kontakt",
     },
+    "es": {
+        "latest": "Últimas noticias", "read_more": "Leer", "source": "Fuente",
+        "why": "Por qué importa", "about": "Quiénes somos", "privacy": "Privacidad",
+        "older": "Anteriores", "newer": "Recientes", "page": "Página", "home": "Inicio",
+        "ai_note": "Esta noticia fue preparada por la redacción con ayuda de IA a partir de la publicación original. "
+                   "Verificamos los datos en la fuente y siempre la enlazamos.",
+        "ymyl_note": "Este artículo es solo informativo y no constituye asesoramiento médico ni financiero.",
+        "related": "Más sobre el tema", "notfound": "Página no encontrada", "rss": "RSS",
+        "about_text": "{name} — {tagline} Cada día seleccionamos las noticias clave de fuentes fiables, "
+                      "las explicamos con lenguaje sencillo y siempre enlazamos al original. "
+                      "Los textos se preparan con herramientas de IA bajo supervisión editorial.",
+        "privacy_text": "Este sitio usa analítica anónima y puede mostrar anuncios de Google. Google y sus socios "
+                        "pueden usar cookies para mostrar anuncios. No recopilamos datos personales mediante "
+                        "formularios. Puedes gestionar las cookies publicitarias en la Configuración de anuncios de Google.",
+        "contact": "Contacto",
+    },
+    "fr": {
+        "latest": "Dernières actualités", "read_more": "Lire", "source": "Source",
+        "why": "Pourquoi c'est important", "about": "À propos", "privacy": "Confidentialité",
+        "older": "Plus anciens", "newer": "Plus récents", "page": "Page", "home": "Accueil",
+        "ai_note": "Cet article a été préparé par la rédaction avec l'aide de l'IA à partir de la publication d'origine. "
+                   "Nous vérifions les faits à la source et la citons toujours.",
+        "ymyl_note": "Cet article est fourni à titre informatif et ne constitue pas un conseil médical ou financier.",
+        "related": "Sur le même sujet", "notfound": "Page introuvable", "rss": "RSS",
+        "about_text": "{name} — {tagline} Chaque jour, nous sélectionnons l'essentiel de l'actualité auprès de sources "
+                      "fiables, l'expliquons simplement et renvoyons toujours vers l'original. "
+                      "Les textes sont préparés avec des outils d'IA sous contrôle éditorial.",
+        "privacy_text": "Ce site utilise une mesure d'audience anonyme et peut afficher des annonces Google. Google et "
+                        "ses partenaires peuvent utiliser des cookies publicitaires. Nous ne collectons pas de données "
+                        "personnelles via des formulaires. Gérez les cookies dans les Paramètres des annonces Google.",
+        "contact": "Contact",
+    },
+    "de": {
+        "latest": "Neueste Nachrichten", "read_more": "Lesen", "source": "Quelle",
+        "why": "Warum das wichtig ist", "about": "Über uns", "privacy": "Datenschutz",
+        "older": "Ältere", "newer": "Neuere", "page": "Seite", "home": "Startseite",
+        "ai_note": "Dieser Beitrag wurde von der Redaktion mit Hilfe von KI auf Grundlage der Originalmeldung erstellt. "
+                   "Wir prüfen die Fakten an der Quelle und verlinken sie immer.",
+        "ymyl_note": "Dieser Artikel dient nur der Information und ist keine medizinische oder finanzielle Beratung.",
+        "related": "Mehr zum Thema", "notfound": "Seite nicht gefunden", "rss": "RSS",
+        "about_text": "{name} — {tagline} Jeden Tag wählen wir die wichtigsten Meldungen aus vertrauenswürdigen Quellen, "
+                      "erklären sie verständlich und verlinken immer das Original. "
+                      "Die Texte entstehen mit KI-Werkzeugen unter redaktioneller Kontrolle.",
+        "privacy_text": "Diese Website nutzt anonyme Reichweitenmessung und kann Google-Anzeigen zeigen. Google und "
+                        "Partner können Cookies für Werbung verwenden. Wir erheben keine personenbezogenen Daten über "
+                        "Formulare. Werbe-Cookies verwalten Sie in den Google-Anzeigeneinstellungen.",
+        "contact": "Kontakt",
+    },
+    "it": {
+        "latest": "Ultime notizie", "read_more": "Leggi", "source": "Fonte",
+        "why": "Perché è importante", "about": "Chi siamo", "privacy": "Privacy",
+        "older": "Meno recenti", "newer": "Più recenti", "page": "Pagina", "home": "Home",
+        "ai_note": "Questo articolo è stato preparato dalla redazione con l'aiuto dell'IA sulla base della fonte originale. "
+                   "Verifichiamo i fatti alla fonte e la citiamo sempre.",
+        "ymyl_note": "Questo articolo ha scopo informativo e non costituisce consulenza medica o finanziaria.",
+        "related": "Altro sull'argomento", "notfound": "Pagina non trovata", "rss": "RSS",
+        "about_text": "{name} — {tagline} Ogni giorno selezioniamo le notizie principali da fonti affidabili, "
+                      "le spieghiamo in modo semplice e rimandiamo sempre all'originale. "
+                      "I testi sono preparati con strumenti di IA sotto controllo redazionale.",
+        "privacy_text": "Questo sito usa statistiche anonime e può mostrare annunci Google. Google e i partner possono "
+                        "usare cookie pubblicitari. Non raccogliamo dati personali tramite moduli. Puoi gestire i "
+                        "cookie nelle Impostazioni annunci di Google.",
+        "contact": "Contatti",
+    },
+    "pt": {
+        "latest": "Últimas notícias", "read_more": "Ler", "source": "Fonte",
+        "why": "Por que importa", "about": "Sobre nós", "privacy": "Privacidade",
+        "older": "Anteriores", "newer": "Recentes", "page": "Página", "home": "Início",
+        "ai_note": "Esta matéria foi preparada pela redação com ajuda de IA a partir da publicação original. "
+                   "Verificamos os fatos na fonte e sempre a citamos.",
+        "ymyl_note": "Este artigo é apenas informativo e não constitui aconselhamento médico ou financeiro.",
+        "related": "Mais sobre o tema", "notfound": "Página não encontrada", "rss": "RSS",
+        "about_text": "{name} — {tagline} Todos os dias selecionamos as principais notícias de fontes confiáveis, "
+                      "explicamos em linguagem simples e sempre indicamos o original. "
+                      "Os textos são preparados com ferramentas de IA sob supervisão editorial.",
+        "privacy_text": "Este site usa análise anônima e pode exibir anúncios do Google. O Google e parceiros podem "
+                        "usar cookies de publicidade. Não coletamos dados pessoais por formulários. Gerencie os "
+                        "cookies nas Configurações de anúncios do Google.",
+        "contact": "Contato",
+    },
 }
 
 
