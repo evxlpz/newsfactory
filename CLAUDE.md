@@ -5,7 +5,8 @@
 ## Як влаштовано
 - `sites/<id>/site.yaml` — один сайт = одна папка (назва, мови, джерела RSS, рубрики, кольори, соцмережі).
 - `engine/` — рушій: `collect` (RSS + повний текст) → `rewrite` (Gemini, усі мови одним запитом) →
-  `build` (статичний HTML, sitemap, news-sitemap, RSS, обкладинки) → `deploy` (Cloudflare Pages) → `distribute` (соцмережі).
+  `images` (одна ШІ-ілюстрація на статтю, Workers AI flux; запасна — фірмова картка) → `build` (статичний HTML,
+  sitemap, news-sitemap, RSS) → `deploy` (VPS Hetzner: rsync + Caddy, HTTPS авто) → `distribute` (соцмережі).
 - `content/<id>/*.json` — статті (комітить бот). `state/<id>/` — що вже бачили / що вже запостили.
 - `.github/workflows/run.yml` — щогодини; понеділок — тижневий звіт у Telegram.
 
@@ -14,12 +15,18 @@
   зловити якомога ширшу аудиторію (дивимось, де залетить: ES/BR, EN тощо).
 - Мови на решті сайтів (13): uk, en, pl, es, fr, de, it, pt, ru, zh, ja, ko, tr. Перший запит до Gemini —
   uk+en+pl+es+fr з джерела, далі по 5 мов з англійської версії → 3 запити на статтю → потрібно 3–5 ключів Gemini.
-- zh/ja/ko: обкладинки шрифтом Noto Sans CJK (apt fonts-noto-cjk у workflow), перенос по символах, slug з англійської.
+- zh/ja/ko: slug з англійської версії.
+- Хостинг — тільки VPS (не Cloudflare Pages: там ліміт 20 000 файлів на сайт, 13 мов його з'їдають за місяць).
+  Картинки комітити в git не можна (розмір репо) — вони живуть лише на VPS у /srv/sites/<id>/img/;
+  незалиті чекають у .cache/newimg (actions/cache).
+- Фішки як у Межі (обов'язкові): ШІ-ілюстрація з підписом, лід-цитата, кнопки поширення всюди (нативне меню +
+  Telegram, Viber, WhatsApp, FB, Messenger, Threads, X, LinkedIn, Reddit, Pinterest, email, копіювати),
+  «Дивіться ще» після 2-го абзацу кожною мовою, плашка «Читати вашою мовою», «бажане джерело Google» (коли є домен).
 - Нова мова: додати UI в engine/i18n.py, назву в LANG_NAMES, tagline і category_labels у кожен site.yaml.
 - Назва видання: кирилицею для uk, `name_latin` для інших мов.
 - Gemini: тільки безкоштовний API і flash-lite (`gemini-flash-lite-latest`). Кілька ключів: GEMINI_API_KEY, GEMINI_API_KEY_2…
 - Токени ніколи не в коді й не в yaml — у yaml лише НАЗВИ secret-змінних. Усі Secrets доходять у рушій через `SECRETS_JSON`.
-- Новий сайт: скопіювати папку в `sites/`, змінити id/назву/pages_project/джерела. Рушій не чіпати.
+- Новий сайт: скопіювати папку в `sites/`, змінити id/назву/subdomain/джерела. Рушій не чіпати.
 - Не маскувати помилки порожнім try/except — логувати й іти далі.
 - Контент: тільки факти з джерела, посилання на джерело, позначка про ШІ. YMYL (здоров'я/гроші) — без порад.
   Політика окремим сайтом — не робимо. Superlens на сайтах не рекламуємо перші 2–3 місяці; потім лише явний блок «Партнер».

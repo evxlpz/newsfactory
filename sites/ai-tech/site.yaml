@@ -1,8 +1,8 @@
 # Сайт «Нейрон». Токени соцмереж — тільки назви secret-змінних, самі значення в GitHub Secrets.
-# domain: null → працює на neiron-news.pages.dev; коли купимо домен — вписати сюди.
+# domain: null → працює на neiron-news.<IP>.sslip.io; коли купимо домен — вписати сюди.
 name: Нейрон
 name_latin: Neiron
-pages_project: neiron-news
+subdomain: neiron-news
 domain: null
 langs:
 - uk

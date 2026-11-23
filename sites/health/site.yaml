@@ -1,8 +1,8 @@
 # Сайт «Пульс». Токени соцмереж — тільки назви secret-змінних, самі значення в GitHub Secrets.
-# domain: null → працює на puls-health.pages.dev; коли купимо домен — вписати сюди.
+# domain: null → працює на puls-health.<IP>.sslip.io; коли купимо домен — вписати сюди.
 name: Пульс
 name_latin: Puls
-pages_project: puls-health
+subdomain: puls-health
 domain: null
 langs:
 - uk

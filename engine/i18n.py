@@ -204,3 +204,34 @@ UI = {
 
 def t(lang: str) -> dict:
     return UI.get(lang, UI["en"])
+
+
+# Додаткові тексти (поширення, «Дивіться ще», плашка мови, бажане джерело Google, підпис ілюстрації)
+EXTRA = {
+    "uk": ("Дивіться ще", "Поділитися", "Копіювати посилання", "Скопійовано", "Читати українською",
+           "Додати в бажані джерела Google", "Ілюстрація згенерована ШІ"),
+    "en": ("See also", "Share", "Copy link", "Copied", "Read in English",
+           "Add as a preferred source on Google", "AI-generated illustration"),
+    "pl": ("Zobacz też", "Udostępnij", "Kopiuj link", "Skopiowano", "Czytaj po polsku",
+           "Dodaj jako preferowane źródło w Google", "Ilustracja wygenerowana przez AI"),
+    "es": ("Ver también", "Compartir", "Copiar enlace", "Copiado", "Leer en español",
+           "Añadir como fuente preferida en Google", "Ilustración generada por IA"),
+    "fr": ("À voir aussi", "Partager", "Copier le lien", "Copié", "Lire en français",
+           "Ajouter comme source préférée sur Google", "Illustration générée par IA"),
+    "de": ("Siehe auch", "Teilen", "Link kopieren", "Kopiert", "Auf Deutsch lesen",
+           "Als bevorzugte Quelle bei Google hinzufügen", "KI-generierte Illustration"),
+    "it": ("Vedi anche", "Condividi", "Copia link", "Copiato", "Leggi in italiano",
+           "Aggiungi come fonte preferita su Google", "Illustrazione generata dall'IA"),
+    "pt": ("Veja também", "Compartilhar", "Copiar link", "Copiado", "Ler em português",
+           "Adicionar como fonte preferida no Google", "Ilustração gerada por IA"),
+    "ru": ("Смотрите также", "Поделиться", "Копировать ссылку", "Скопировано", "Читать на русском",
+           "Добавить в предпочитаемые источники Google", "Иллюстрация сгенерирована ИИ"),
+    "zh": ("另见", "分享", "复制链接", "已复制", "阅读中文版", "在 Google 中设为首选来源", "AI 生成的插图"),
+    "ja": ("あわせて読みたい", "共有", "リンクをコピー", "コピーしました", "日本語で読む",
+           "Google で優先ソースに追加", "AI生成イラスト"),
+    "ko": ("함께 보기", "공유", "링크 복사", "복사됨", "한국어로 읽기", "Google에서 선호 출처로 추가", "AI 생성 일러스트"),
+    "tr": ("Ayrıca bakın", "Paylaş", "Bağlantıyı kopyala", "Kopyalandı", "Türkçe oku",
+           "Google'da tercih edilen kaynak olarak ekle", "Yapay zekâ ile üretilmiş illüstrasyon"),
+}
+for _l, _v in EXTRA.items():
+    UI[_l].update(dict(zip(("see_also", "share", "copy_link", "copied", "read_in", "pref_source", "ai_image"), _v)))

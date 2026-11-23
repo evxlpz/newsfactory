@@ -65,10 +65,19 @@ def brand(cfg: dict, lang: str) -> str:
     return cfg["name"] if lang == "uk" else cfg.get("name_latin") or cfg["name"]
 
 
+def site_host(cfg: dict) -> str:
+    """Хост сайту: свій домен, якщо вписаний у site.yaml, інакше безкоштовний <subdomain>.<ip>.sslip.io на VPS."""
+    if cfg.get("domain"):
+        return cfg["domain"]
+    ip = os.environ.get("VPS_HOST", "").strip()
+    if not ip:
+        return "localhost"
+    return f"{cfg['subdomain']}.{ip.replace('.', '-')}.sslip.io"
+
+
 def site_url(cfg: dict) -> str:
-    """Базовий URL сайту: свій домен, якщо є, інакше pages.dev."""
-    domain = cfg.get("domain") or f"{cfg['pages_project']}.pages.dev"
-    return f"https://{domain}".rstrip("/")
+    host = site_host(cfg)
+    return f"http://{host}" if host == "localhost" else f"https://{host}"
 
 
 def read_json(path: Path, default):

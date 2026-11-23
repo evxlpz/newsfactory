@@ -1,8 +1,8 @@
 # Сайт «Капітал». Токени соцмереж — тільки назви secret-змінних, самі значення в GitHub Secrets.
-# domain: null → працює на kapital-news.pages.dev; коли купимо домен — вписати сюди.
+# domain: null → працює на kapital-news.<IP>.sslip.io; коли купимо домен — вписати сюди.
 name: Капітал
 name_latin: Kapital
-pages_project: kapital-news
+subdomain: kapital-news
 domain: null
 langs:
 - uk

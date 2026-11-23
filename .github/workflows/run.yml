@@ -37,21 +37,22 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-
       - run: pip install -r requirements.txt
 
-      - name: Шрифти для китайської/японської/корейської обкладинок
-        run: sudo apt-get install -y -qq fonts-noto-cjk >/dev/null
+      - name: SSH-ключ для VPS
+        env:
+          KEY: ${{ secrets.VPS_SSH_KEY }}
+        run: |
+          if [ -n "$KEY" ]; then
+            mkdir -p ~/.ssh && printf '%s\n' "$KEY" > ~/.ssh/id_ed25519 && chmod 600 ~/.ssh/id_ed25519
+          fi
 
-      - name: Кеш обкладинок
+      - name: Картинки, ще не залиті на VPS
         uses: actions/cache@v4
         with:
-          path: .cache/img
-          key: img-${{ github.run_id }}
-          restore-keys: img-
+          path: .cache/newimg
+          key: newimg-${{ github.run_id }}
+          restore-keys: newimg-
 
       - name: Тижневий звіт
         if: github.event.schedule == '41 6 * * 1'
@@ -72,7 +73,7 @@ jobs:
           git diff --cached --quiet || git commit -m "content: $(date -u +%F' '%H:%M)"
           for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done
 
-      - name: Деплой Cloudflare Pages
+      - name: Деплой на VPS
         run: python -m engine.deploy
 
       - name: Автопостинг

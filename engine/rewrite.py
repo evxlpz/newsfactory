@@ -43,7 +43,9 @@ def _prompt(cfg: dict, item: dict, fulltext: str) -> str:
 - додай короткий контекст «чому це важливо» для читача;
 - не копіюй речення з джерела; цитати — максимум одна коротка, в лапках;
 - без клікбейту, без емодзі в заголовку, без «шокуюча новина»;
-- body_html: 250–450 слів, теги лише <p>, <h2>, <ul>, <li>, <strong>, <blockquote>; без посилань;
+- обсяг за змістом: гаряча коротка новина — 150–250 слів, новина з деталями чи дослідження — до 450 слів; не лий воду;
+- dek — 1–2 речення: головне, що сталося (показується як лід);
+- body_html: теги лише <p>, <h2>, <ul>, <li>, <strong>, <blockquote>; без посилань;
 - social: 1–3 речення для соцмереж + 2–3 хештеги, мовою відповідної версії;
 - card_title: до 70 символів, для картинки-обкладинки.
 {UK_STYLE}
@@ -51,8 +53,12 @@ def _prompt(cfg: dict, item: dict, fulltext: str) -> str:
 або в джерелі замало фактів для нормального тексту.
 Категорія — одна з: {cats}.
 
+image_prompt — англійською, 1–2 речення: опис ілюстрації до новини в стилі редакційного паперового колажу
+(символічні предмети, місця, техніка; без тексту й логотипів, без облич реальних людей, без крові й жертв,
+не «фото події», а символічна ілюстрація).
+
 Поверни тільки JSON:
-{{"skip": false, "skip_reason": "", "category": "...",
+{{"skip": false, "skip_reason": "", "category": "...", "image_prompt": "...",
   "langs": {{"<код мови>": {{"title": "...", "dek": "1-2 речення ліду", "body_html": "...",
      "why": "1-2 речення", "tags": ["...", "..."], "social": "...", "card_title": "..."}}}}}}
 
@@ -87,7 +93,7 @@ ORIGINAL (en):
 
 
 def _accept(v: dict | None) -> dict | None:
-    if not v or not v.get("title") or len(v.get("body_html", "")) < 600:
+    if not v or not v.get("title") or len(v.get("body_html", "")) < 400:
         return None
     v["body_html"] = _sanitize(v["body_html"])
     v["title"] = v["title"].strip().rstrip(".")
@@ -142,6 +148,7 @@ def rewrite(cfg: dict, item: dict, fulltext: str, gemini) -> dict | None:
         "created": int(time.time()),
         "category": data.get("category") if data.get("category") in cats else cats[0],
         "source": {"name": item["source"], "title": item["title"], "link": item["link"]},
+        "image_prompt": (data.get("image_prompt") or "")[:600],
         "langs": langs_out,
     }
     write_json(CONTENT_DIR / cfg["id"] / f"{art['id']}.json", art)

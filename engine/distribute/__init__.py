@@ -8,7 +8,7 @@ import time
 import requests
 
 from ..build import art_path, load_articles
-from ..cards import CACHE
+from ..images import local_image
 from ..common import STATE_DIR, brand, log, read_json, site_url, write_json
 from ..i18n import t
 from .channels import CHANNELS, ChannelError
@@ -56,12 +56,12 @@ def distribute(cfg: dict) -> list[str]:
             if lang not in a["langs"] or key in posted.get(a["id"], {}):
                 continue
             v = a["langs"][lang]
-            img_key = f"{a['id']}-{lang}"
+            loc = local_image(cfg, a)
             p = {
                 "title": v["title"], "dek": v["dek"], "social": v["social"],
                 "title_html": html.escape(v["title"]), "social_html": html.escape(v["social"]),
-                "url": base + art_path(cfg, lang, a), "img_url": f"{base}/img/{img_key}.png",
-                "img_path": str(CACHE / cfg["id"] / f"{img_key}.png"),
+                "url": base + art_path(cfg, lang, a), "img_url": base + a.get("image", ""),
+                "img_path": str(loc) if loc else "",
                 "read_more": t(lang)["read_more"], "link_hint": f"{brand(cfg, lang)} — {base.replace('https://', '')}",
             }
             try:

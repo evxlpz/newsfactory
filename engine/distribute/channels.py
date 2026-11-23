@@ -57,10 +57,13 @@ class Telegram(Channel):
     def post(self, p):
         token, chat = _env(self.conf, "token_env"), _env(self.conf, "chat_env")
         caption = f"<b>{p['title_html']}</b>\n\n{p['social_html']}\n\n<a href=\"{p['url']}\">{p['read_more']} →</a>"
-        with open(p["img_path"], "rb") as f:
-            r = _s.post(f"https://api.telegram.org/bot{token}/sendPhoto",
-                        data={"chat_id": chat, "caption": caption[:1024], "parse_mode": "HTML"},
-                        files={"photo": f}, timeout=60)
+        data = {"chat_id": chat, "caption": caption[:1024], "parse_mode": "HTML"}
+        if p["img_path"]:
+            with open(p["img_path"], "rb") as f:
+                r = _s.post(f"https://api.telegram.org/bot{token}/sendPhoto", data=data, files={"photo": f}, timeout=60)
+        else:
+            r = _s.post(f"https://api.telegram.org/bot{token}/sendPhoto", data={**data, "photo": p["img_url"]},
+                        timeout=60)
         return str(_check(r, "telegram")["result"]["message_id"])
 
 
@@ -125,8 +128,9 @@ class Bluesky(Channel):
                           "password": _env(self.conf, "password_env")}, timeout=30)
         sess = _check(r, "bluesky login")
         auth = {"Authorization": f"Bearer {sess['accessJwt']}"}
-        blob = _check(_s.post(f"{self.PDS}/com.atproto.repo.uploadBlob", headers={**auth, "Content-Type": "image/png"},
-                              data=Path(p["img_path"]).read_bytes(), timeout=60), "bluesky blob")["blob"]
+        raw = Path(p["img_path"]).read_bytes() if p["img_path"] else _s.get(p["img_url"], timeout=30).content
+        blob = _check(_s.post(f"{self.PDS}/com.atproto.repo.uploadBlob", headers={**auth, "Content-Type": "image/jpeg"},
+                              data=raw, timeout=60), "bluesky blob")["blob"]
         text = p["social"]
         if len(text) > 290:
             text = text[:287].rsplit(" ", 1)[0] + "…"

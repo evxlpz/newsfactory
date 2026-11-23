@@ -5,7 +5,7 @@
 {% set lead = items[0] if page == 1 and not heading else None %}
 {% if lead %}
 <article class="lead">
-  <a href="{{ lead.url }}" class="lead-img"><img src="{{ lead.img }}" alt="" width="1200" height="630"></a>
+  <a href="{{ lead.url }}" class="lead-img"><img src="{{ lead.img }}" alt="" width="1200" height="675"></a>
   <div>
     <span class="cat">{{ lead.cat }}</span>
     <h2><a href="{{ lead.url }}">{{ lead.v.title }}</a></h2>
@@ -17,7 +17,7 @@
 <div class="grid">
 {% for i in (items[1:] if lead else items) %}
   <article class="card">
-    <a href="{{ i.url }}"><img src="{{ i.img }}" alt="" loading="lazy" width="1200" height="630"></a>
+    <a href="{{ i.url }}"><img src="{{ i.img }}" alt="" loading="lazy" width="1200" height="675"></a>
     <span class="cat">{{ i.cat }}</span>
     <h3><a href="{{ i.url }}">{{ i.v.title }}</a></h3>
     <time datetime="{{ i.a.created|iso }}">{{ i.a.created|date }}</time>

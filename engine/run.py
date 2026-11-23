@@ -7,7 +7,8 @@ import time
 
 from .build import build_site, load_articles
 from .collect import collect, fetch_feed, fetch_fulltext, mark_seen
-from .common import STATE_DIR, load_sites, log, read_json, write_json
+from .common import CONTENT_DIR, STATE_DIR, load_sites, log, read_json, write_json
+from .images import make_image
 from .distribute import distribute, notify_admin
 from .gemini import Gemini, QuotaExhausted
 from .rewrite import rewrite
@@ -39,6 +40,8 @@ def cmd_generate(sites) -> int:
             if res and res.get("skip"):
                 log(f"  – пропуск: {it['title'][:70]} ({res.get('reason')})")
                 continue
+            res["image"] = make_image(cfg, res)
+            write_json(CONTENT_DIR / cfg["id"] / f"{res['id']}.json", res)
             made += 1
             total += 1
             log(f"  + {res['langs'][cfg['default_lang']]['title'][:80]}")

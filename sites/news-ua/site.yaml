@@ -1,8 +1,8 @@
 # Сайт «Стрічка». Токени соцмереж — тільки назви secret-змінних, самі значення в GitHub Secrets.
-# domain: null → працює на strichka-news.pages.dev; коли купимо домен — вписати сюди.
+# domain: null → працює на strichka-news.<IP>.sslip.io; коли купимо домен — вписати сюди.
 name: Стрічка
 name_latin: Strichka
-pages_project: strichka-news
+subdomain: strichka-news
 domain: null
 langs:
 - uk

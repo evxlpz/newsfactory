@@ -34,6 +34,10 @@
     {% for c, label in cats %}<a href="{{ pre }}c/{{ c }}/">{{ label }}</a>{% endfor %}
   </nav>
 </header>
+{% if alternates|length > 1 %}<div id="langbar" class="langbar" hidden>
+  {% for l, u in alternates.items() %}{% if l != lang %}<a href="{{ u }}" hreflang="{{ l }}">{{ read_in.get(l, l) }} →</a>{% endif %}{% endfor %}
+  <button type="button" aria-label="close">×</button>
+</div>{% endif %}
 <main class="wrap">
 {% block main %}{% endblock %}
 </main>
@@ -44,5 +48,6 @@
     <p class="muted">© {{ year }} {{ brand }}</p>
   </div>
 </footer>
+<script src="/site.js" defer></script>
 </body>
 </html>

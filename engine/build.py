@@ -10,8 +10,7 @@ from xml.sax.saxutils import escape
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from .cards import make_card
-from .common import CONTENT_DIR, LANG_NAMES, brand, OUT_DIR, STATIC_DIR, TEMPLATES_DIR, log, read_json, site_url
+from .common import CONTENT_DIR, LANG_NAMES, OUT_DIR, STATIC_DIR, TEMPLATES_DIR, brand, log, read_json, site_host, site_url
 from .i18n import t
 
 PER_PAGE = 24
@@ -64,7 +63,8 @@ def build_site(cfg: dict) -> Path:
     log(f"[{cfg['id']}] збірка: {len(arts)} статей → {base}")
 
     shutil.copy(STATIC_DIR / "style.css", out / "style.css")
-    (out / "img").mkdir()
+    shutil.copy(STATIC_DIR / "site.js", out / "site.js")
+    host = site_host(cfg)
 
     tpl = env()
     sitemap_urls: list[tuple[str, int, dict]] = []
@@ -77,20 +77,12 @@ def build_site(cfg: dict) -> Path:
             "langs": cfg["langs"], "lang_names": LANG_NAMES,
             "tagline": cfg["tagline"].get(lang, ""), "year": time.gmtime().tm_year,
             "cats": [(c, cat_label(cfg, c, lang)) for c in cfg.get("categories", [])],
+            "read_in": {l: t(l)["read_in"] for l in cfg["langs"]},
         }
 
-        def card(a, _lang=lang):
-            key = f"{a['id']}-{_lang}"
-            src = make_card(cfg, a["langs"][_lang]["card_title"], cat_label(cfg, a["category"], _lang), key,
-                            brand(cfg, _lang), _lang)
-            dst = out / "img" / f"{key}.png"
-            if not dst.exists():
-                shutil.copy(src, dst)
-            return f"/img/{key}.png"
-
         items = [{
-            "a": a, "v": a["langs"][lang], "url": art_path(cfg, lang, a), "img": card(a),
-            "cat": cat_label(cfg, a["category"], lang),
+            "a": a, "v": a["langs"][lang], "url": art_path(cfg, lang, a),
+            "img": a.get("image") or "", "cat": cat_label(cfg, a["category"], lang),
         } for a in la]
 
         # головна + пагінація
@@ -119,21 +111,31 @@ def build_site(cfg: dict) -> Path:
         for n, it in enumerate(items):
             a = it["a"]
             alternates = {l: base + art_path(cfg, l, a) for l in a["langs"] if l in cfg["langs"]}
-            related = [i for i in items if i["a"]["category"] == a["category"] and i is not it][:4]
+            same = [i for i in items if i["a"]["category"] == a["category"] and i is not it]
+            others = [i for i in items[:30] if i is not it and i not in same]
+            related = (same + others)[:6]
+            body = _inline_see_also(it["v"]["body_html"], related[:3], ui)
+            org = {"@type": "NewsMediaOrganization", "name": common["brand"], "url": base,
+                   "logo": {"@type": "ImageObject", "url": f"{base}/logo.png"}}
+            crumbs = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": common["brand"], "item": base + common["pre"]},
+                {"@type": "ListItem", "position": 2, "name": it["cat"],
+                 "item": f"{base}{common['pre']}c/{a['category']}/"},
+                {"@type": "ListItem", "position": 3, "name": it["v"]["title"][:110]}]}
             jsonld = {
                 "@context": "https://schema.org", "@type": "NewsArticle",
                 "headline": it["v"]["title"][:110], "description": it["v"]["dek"],
-                "image": [base + it["img"]], "inLanguage": lang,
+                "image": [base + it["img"]] if it["img"] else [], "inLanguage": lang,
                 "datePublished": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(a["created"])),
                 "dateModified": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(a["created"])),
-                "author": {"@type": "Organization", "name": common["brand"], "url": base},
-                "publisher": {"@type": "Organization", "name": common["brand"], "url": base},
+                "author": org, "publisher": org,
                 "mainEntityOfPage": base + it["url"],
                 "isBasedOn": a["source"]["link"],
             }
             _write(out, it["url"], tpl.get_template("article.html").render(
-                **common, it=it, related=related, canonical=base + it["url"], alternates=alternates,
-                title=it["v"]["title"], jsonld=json.dumps(jsonld, ensure_ascii=False)))
+                **common, it=it, body=body, related=related[:4], canonical=base + it["url"], alternates=alternates,
+                title=it["v"]["title"], host=host,
+                jsonld=json.dumps([jsonld, crumbs], ensure_ascii=False)))
             sitemap_urls.append((it["url"], a["created"], {"lang": lang, "title": it["v"]["title"],
                                                            "alternates": alternates}))
 
@@ -150,7 +152,7 @@ def build_site(cfg: dict) -> Path:
             f"<item><title>{escape(i['v']['title'])}</title><link>{base}{i['url']}</link>"
             f"<guid>{base}{i['url']}</guid><pubDate>{formatdate(i['a']['created'])}</pubDate>"
             f"<description>{escape(i['v']['dek'])}</description>"
-            f"<enclosure url=\"{base}{i['img']}\" type=\"image/png\" length=\"0\"/></item>"
+            f"<enclosure url=\"{base}{i['img']}\" type=\"image/jpeg\" length=\"0\"/></item>"
             for i in items[:50])
         (out / common["pre"].lstrip("/")).mkdir(parents=True, exist_ok=True)
         (out / common["pre"].lstrip("/") / "feed.xml").write_text(
@@ -164,15 +166,13 @@ def build_site(cfg: dict) -> Path:
     (out / "404.html").write_text(tpl.get_template("page.html").render(
         cfg=cfg, lang=cfg["default_lang"], ui=ui, brand=brand(cfg, cfg["default_lang"]), base=base, pre="/", langs=cfg["langs"], lang_names=LANG_NAMES,
         tagline=cfg["tagline"].get(cfg["default_lang"], ""), year=time.gmtime().tm_year,
-        cats=[(c, cat_label(cfg, c, cfg["default_lang"])) for c in cfg.get("categories", [])],
+        cats=[(c, cat_label(cfg, c, cfg["default_lang"])) for c in cfg.get("categories", [])], read_in={},
         title=ui["notfound"], body="", canonical=base + "/", alternates={}), encoding="utf-8")
 
     _sitemaps(cfg, out, base, sitemap_urls)
     (out / "robots.txt").write_text(
         f"User-agent: *\nAllow: /\nSitemap: {base}/sitemap.xml\nSitemap: {base}/news-sitemap.xml\n")
-    (out / "_headers").write_text(
-        "/img/*\n  Cache-Control: public, max-age=31536000, immutable\n"
-        "/style.css\n  Cache-Control: public, max-age=3600\n")
+    _logo(cfg, out)
     if cfg.get("ads_txt"):
         (out / "ads.txt").write_text(cfg["ads_txt"].strip() + "\n")
     return out
@@ -198,3 +198,27 @@ def _sitemaps(cfg, out: Path, base: str, urls) -> None:
     (out / "news-sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
         'xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">' + news + "</urlset>", encoding="utf-8")
+
+
+def _inline_see_also(body: str, rel: list[dict], ui: dict) -> str:
+    """«Дивіться ще» всередині тексту — після другого абзацу (як у Межі)."""
+    if not rel:
+        return body
+    links = "".join(f'<li><a href="{i["url"]}">{escape(i["v"]["title"])}</a></li>' for i in rel)
+    block = f'<aside class="see-also"><strong>{escape(ui["see_also"])}</strong><ul>{links}</ul></aside>'
+    parts = body.split("</p>")
+    if len(parts) < 4:
+        return body + block
+    return "</p>".join(parts[:2]) + "</p>" + block + "</p>".join(parts[2:])
+
+
+def _logo(cfg: dict, out: Path) -> None:
+    """Квадратний логотип для розмітки NewsMediaOrganization."""
+    from PIL import Image, ImageDraw, ImageFont
+    c = cfg["colors"]["accent"].lstrip("#")
+    img = Image.new("RGB", (512, 512), tuple(int(c[i:i + 2], 16) for i in (0, 2, 4)))
+    d = ImageDraw.Draw(img)
+    letter = (cfg.get("name_latin") or cfg["name"])[0]
+    f = ImageFont.truetype(str(STATIC_DIR / "fonts" / "Inter-Bold.otf"), 320)
+    d.text((256, 250), letter, font=f, fill=cfg["colors"].get("accent_ink", "#ffffff"), anchor="mm")
+    img.save(out / "logo.png")

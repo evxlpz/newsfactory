@@ -1,8 +1,8 @@
 # Сайт «Дивосвіт». Токени соцмереж — тільки назви secret-змінних, самі значення в GitHub Secrets.
-# domain: null → працює на dyvosvit.pages.dev; коли купимо домен — вписати сюди.
+# domain: null → працює на dyvosvit.<IP>.sslip.io; коли купимо домен — вписати сюди.
 name: Дивосвіт
 name_latin: Dyvosvit
-pages_project: dyvosvit
+subdomain: dyvosvit
 domain: null
 langs:
 - uk
